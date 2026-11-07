@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f3e9">
+  <meta name="description" content="A little paper. A big adventure. An offline-friendly, handcrafted river game.">
+  <title>Paper Boat - A little river adventure</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%232d777c' d='M3 30 32 40 61 30 48 52 32 57 16 52Z'/%3E%3Cpath fill='%23f7cc8f' d='M32 6 51 31 32 40 15 31Z'/%3E%3C/svg%3E">
+  <style>
+:root{--ink:#244b48;--muted:#78908a;--paper:#f6f5ed;--cream:#fffdf4;--teal:#307b7a;--coral:#d77b60;--gold:#dba84c;--line:#dce3d7;--shadow:0 25px 70px -30px #254b4b50;font-family:'Trebuchet MS',Arial,sans-serif;color:var(--ink);font-synthesis:none;color-scheme:light}
+*{box-sizing:border-box}html{min-height:100%;background:var(--paper)}body{margin:0;background:radial-gradient(ellipse at 5% 8%,#fffef8,transparent 60%),var(--paper)}button,a,input{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit;cursor:pointer}button:disabled{cursor:default}button:focus-visible,a:focus-visible,canvas:focus-visible,input:focus-visible{outline:3px solid #d78255;outline-offset:5px}button{touch-action:manipulation}button:hover{filter:brightness(1.035)}button:active{transform:translateY(1px)}[hidden]{display:none!important}.svg-library{position:absolute;width:0;height:0;overflow:hidden}.icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}.app{width:min(1180px,calc(100% - 64px));margin:0 auto;padding:28px 0 24px}.topbar{height:66px;display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}.brand{display:flex;align-items:center;gap:13px;text-decoration:none;color:var(--ink)}.brand-boat{width:47px;height:43px;color:#4e8b85}.brand>div>span{font:700 34px/.95 Georgia,serif;letter-spacing:-1.8px}.brand-dot{color:var(--coral)}.brand small{display:block;letter-spacing:2.1px;font-size:8px;font-weight:700;margin-top:8px;color:#7a9289}.top-actions{display:flex;gap:10px;align-items:center}.record{display:flex;align-items:center;gap:11px;padding:0 9px}.record>.icon{color:#a89d79;width:23px;height:23px}.record small{display:block;font-size:8px;font-weight:700;letter-spacing:1.5px;color:var(--muted);margin-bottom:4px}.record strong{font-size:16px;letter-spacing:.4px}.record strong span{font-weight:400;font-size:13px}.divider{height:29px;width:1px;background:var(--line);margin:0 10px}.icon-button{height:42px;width:42px;display:inline-flex;justify-content:center;align-items:center;border:1px solid var(--line);border-radius:50%;background:#fffdf450;transition:background .2s}.icon-button:hover{background:#fffdf4}.stage{position:relative;height:650px;width:100%;overflow:hidden;border:1px solid #d3dfd4;border-radius:20px;background:#a6d2c7;box-shadow:var(--shadow);isolation:isolate}.stage:fullscreen{border:0;border-radius:0;width:100%;height:100%}canvas{display:block;width:100%;height:100%;touch-action:none;outline-offset:-5px!important;cursor:grab}canvas:active{cursor:grabbing}.scene-label{position:absolute;top:27px;right:29px;display:flex;align-items:center;gap:8px;font-size:8px;font-weight:700;letter-spacing:2px;color:#456b61;z-index:1}.live-dot,.status-dot{width:5px;height:5px;background:#558d77;border-radius:50%;display:inline-block;flex:none}.home-overlay{position:absolute;inset:0;display:flex;align-items:center;background:linear-gradient(90deg,#f6f5eefa 0%,#f6f5eef5 27%,#f6f5eecb 39%,#f6f5ee18 63%,transparent 75%);z-index:4}.home-copy{padding:35px 0 35px 58px;width:52%;position:relative;z-index:1}.eyebrow{font-size:9px;font-weight:700;letter-spacing:2.1px;line-height:1.5;color:#749188}.home-copy>.eyebrow{display:flex;align-items:center;gap:10px}.tiny-line{width:25px;height:1px;background:#9cafa1}.home-copy h1{font:400 clamp(38px,4.5vw,59px)/1.09 Georgia,'Times New Roman',serif;letter-spacing:-2.5px;margin:24px 0 19px;color:#244b48}.home-copy h1 em{color:#548479;font-weight:400}.home-copy>p{font-size:14px;line-height:1.85;color:#718a7e;margin:0 0 27px}.mode-picker{display:flex;width:316px;padding:4px;border:1px solid #d8e0d2;border-radius:12px;background:#e7eddf80;margin:0 0 14px}.mode-picker button{border:0;border-radius:8px;background:none;flex:1;padding:11px 6px 9px;font-size:12px;font-weight:700;color:#809385;text-align:center;transition:all .2s}.mode-picker button span{display:block;font-size:6.5px;letter-spacing:.9px;margin-top:5px;font-weight:700;opacity:.75}.mode-picker button.selected{background:#fffdf4;box-shadow:0 2px 6px #41583a0d;color:#355e52}.primary-button{display:flex;align-items:center;justify-content:space-between;gap:22px;border:1px solid #296a66;background:#307a73;color:#fffdf4;border-radius:11px;padding:16px 21px;font-size:14px;font-weight:700;box-shadow:0 4px 0 #235d5920;min-height:54px;transition:background .2s,transform .15s}.primary-button:hover{background:#266b65}.primary-button .icon{width:19px;height:19px}.sail-button{width:316px}.boat-picker{display:flex;align-items:center;gap:8px;margin-top:22px}.boat-picker>span{font-size:10px;color:#809083;margin-right:5px}.swatch{width:21px;height:21px;border:4px solid #f6f5ed;border-radius:50%;box-shadow:0 0 0 1px transparent;background:#d7876c;padding:0}.swatch[data-color="1"]{background:#4c9694}.swatch[data-color="2"]{background:#d4ab56}.swatch.selected{box-shadow:0 0 0 1px #899f90}.home-footnote{font-size:9px;color:#9aa899;margin-top:30px;display:flex;align-items:center;gap:6px}.home-footnote .icon{width:13px;height:13px}.art-note{position:absolute;right:18%;top:52%;color:#eef6e3;transform:rotate(-8deg);font:italic 22px Georgia,serif;display:flex;flex-direction:column;align-items:center;opacity:.85;pointer-events:none}.art-note svg{width:60px;height:46px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;transform:rotate(15deg);margin:8px 0 0 35px}.home-corner{position:absolute;right:28px;bottom:23px;font-size:7px;letter-spacing:2px;color:#e6f0d4;display:flex;align-items:center;gap:10px}.home-corner span{font-size:15px;color:#ffdea1}.hud{position:absolute;inset:24px 25px auto;display:flex;justify-content:space-between;align-items:flex-start;pointer-events:none;z-index:3}.hud-left,.hud-right{display:flex;align-items:center;gap:10px}.metric,.lives,.drift-badge{background:#fffdf3e8;box-shadow:0 4px 12px #24504b0a;border:1px solid #ffffff80;backdrop-filter:blur(8px);border-radius:12px}.metric{padding:11px 17px;height:60px;display:flex;gap:13px;align-items:center}.distance-metric{display:block;min-width:102px}.distance-metric small{display:block;font-size:7px;font-weight:700;letter-spacing:1.7px;color:#839a8c;margin-bottom:3px}.metric strong{font-size:23px;font-weight:700;letter-spacing:-.6px;font-variant-numeric:tabular-nums}.unit{font-size:13px;font-weight:400;margin-left:5px;color:#799487}.gold{color:#d8a848}.stars-metric{padding:10px 16px}.stars-metric .icon{width:23px;height:23px;fill:#f9d78a;stroke:#d9a951;stroke-width:1.2}.lives{display:flex;gap:4px;padding:13px 12px;height:48px}.lives .icon{width:18px;height:18px;color:#d98b77;fill:#d98b77;stroke-width:1}.lives .lost{color:#cbd5c8;fill:none}.pause-button{pointer-events:auto;height:48px;width:48px;border:1px solid #ffffff90;background:#fffdf3e8;border-radius:12px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px)}.pause-button .icon{width:17px;height:17px}.drift-badge{padding:12px;height:48px;display:flex;align-items:center;gap:6px;font-size:8px;letter-spacing:1px}.drift-badge .icon{width:17px;height:17px}.shield-status{position:absolute;left:26px;top:98px;display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid #ffffff9e;background:#edfff6df;border-radius:10px;color:#438a91;z-index:2}.shield-status .icon{width:18px;height:18px}.shield-status span{font-size:7px;font-weight:700;letter-spacing:1px;display:block;margin-bottom:5px}.shield-track{height:3px;width:85px;border-radius:10px;background:#bddbd3;overflow:hidden}.shield-track i{display:block;height:100%;background:#509c9a;width:100%;transform-origin:left;transform:scaleX(1)}.toast{position:absolute;z-index:3;top:105px;left:50%;transform:translateX(-50%);background:#fffdf3f2;border:1px solid #ffffff8a;box-shadow:0 6px 24px #284c3820;border-radius:30px;padding:10px 21px;font-size:12px;font-weight:700;color:#416d63;white-space:nowrap;pointer-events:none;animation:toast-in .3s ease-out}.play-hint{position:absolute;top:24%;left:50%;transform:translateX(-50%);font:italic 18px Georgia,serif;color:#315d56;white-space:nowrap;pointer-events:none;text-shadow:0 1px #ffffff99}.journey{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);width:260px;text-align:center;z-index:2;color:#f4f8e9;text-shadow:0 1px 4px #245c5a88;font-size:9px;pointer-events:none}.journey>span:first-child{font-size:12px;font-weight:700;letter-spacing:.4px}.journey-track{height:3px;background:#ffffff40;border-radius:9px;margin:8px 0 7px;overflow:hidden}.journey-track i{display:block;height:100%;background:#fff0c3;transform-origin:left;transform:scaleX(0)}.touch-controls{position:absolute;bottom:24px;left:20px;right:20px;display:none;justify-content:space-between;pointer-events:none;z-index:3}.touch-controls button{height:51px;width:53px;background:#fffdf3c4;backdrop-filter:blur(8px);border:1px solid #ffffff8a;border-radius:15px;pointer-events:auto;display:flex;align-items:center;justify-content:center;touch-action:none;user-select:none}.touch-controls button:first-child .icon{transform:rotate(180deg)}.stage:not([data-state="menu"]) .scene-label{display:none}.modal-layer{position:absolute;inset:0;z-index:6;display:flex;align-items:center;justify-content:center;background:#244e4b45;backdrop-filter:blur(7px);padding:20px;overflow:auto}.dialog{position:relative;text-align:center;background:#faf9f0;border:1px solid #fffff5b5;border-radius:23px;padding:34px 36px 23px;width:min(405px,100%);box-shadow:0 25px 60px #143e4830;animation:panel-in .22s ease-out;margin:auto}.dialog-illustration{width:65px;height:65px;background:#e9eee0;border-radius:50%;margin:0 auto 21px;display:flex;align-items:center;justify-content:center;color:#6f9586}.dialog-illustration>svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}.dialog-illustration.gold{background:#f4ead0;color:#bfa166}.dialog h2{font:400 33px/1.14 Georgia,serif;letter-spacing:-1.3px;margin:13px 0}.dialog>p{font-size:12px;line-height:1.7;color:#829282;margin:0 auto 25px}.dialog .primary-button{width:100%}.text-button{border:0;background:transparent;color:#7c9282;font-size:11px;padding:15px 7px 7px;display:block;margin:4px auto 0}.dialog-footnote{font-size:8px;color:#a0ab98;margin-top:19px}.result-stats{display:flex;margin:24px -4px 20px;justify-content:space-around}.result-stats>div{flex:1;border-right:1px solid var(--line)}.result-stats>div:last-child{border:0}.result-stats strong{display:block;font:400 28px Georgia,serif;letter-spacing:-1px}.result-stats strong>span{font:12px 'Trebuchet MS',sans-serif;letter-spacing:0;margin-left:3px}.result-stats small{display:block;font-size:7px;letter-spacing:1.5px;color:#94a28f;font-weight:700;margin-top:8px}.result-best{font-size:10px;display:flex;justify-content:center;align-items:center;gap:7px;color:#9b936e;background:#f0efdf;border-radius:8px;padding:10px;margin:0 0 21px}.result-best .icon{width:15px;height:15px}.help-dialog{width:min(440px,100%);text-align:left;padding:27px 30px 24px}.help-dialog h2{font-size:29px;margin:13px 0 24px}.dialog-close{position:absolute;right:14px;top:14px;width:28px;height:28px;border:0}.dialog-close .icon{width:16px;height:16px}.help-row{display:flex;gap:14px;margin:16px 0}.help-mark{width:35px;height:35px;background:#e7ecdf;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;color:#6d9a87}.help-mark.gold{background:#f5ebd6;color:#c19c49}.help-mark.coral{background:#f5e6da;color:#cc927b}.help-mark .icon{width:19px;height:19px}.help-row strong{font-size:11px}.help-row p{font-size:10px;line-height:1.65;color:#809080;margin:4px 0 0}.motion-setting{display:flex;align-items:center;gap:8px;font-size:10px;color:#7d8f7c;margin:21px 0 18px;cursor:pointer}.motion-setting input{accent-color:#47887c;width:15px;height:15px;margin:0}.help-keys{display:flex;gap:20px;font-size:9px;color:#87977f;border-top:1px solid var(--line);padding:15px 0 18px}.below-game{display:flex;justify-content:space-between;align-items:center;margin:18px 2px 0;gap:10px;color:#8b9987}.control-note{display:flex;align-items:center;gap:7px;font-size:9px}.control-note strong{font-weight:700;color:#738d7c;font-size:9px}.key-pair{display:flex;gap:3px}kbd{font:10px 'Trebuchet MS',Arial,sans-serif;display:inline-block;background:#fdfcf5;border:1px solid #dee3d6;border-bottom-width:2px;min-width:20px;text-align:center;border-radius:4px;padding:3px;color:#7d8f79}.note-dot{padding:0 8px}.release-note{font-size:7px;letter-spacing:1.1px;display:flex;align-items:center;gap:7px;color:#97a28e}.version{border:1px solid #dbe2d3;border-radius:4px;padding:3px 5px;font-size:7px;letter-spacing:.3px;margin-left:8px;color:#829780}.mobile-note{display:none}.feature-strip{display:flex;justify-content:space-between;gap:30px;max-width:850px;margin:38px auto 0}.feature-strip>div{position:relative;padding-left:34px;flex:1}.feature-strip .icon{position:absolute;left:0;top:3px;width:19px;height:19px;color:#a5b69b}.feature-strip span{font:italic 15px Georgia,serif;color:#74917f;display:block}.feature-strip small{font-size:9px;display:block;color:#a2ad9a;margin-top:6px}.storage-note{font-size:10px;text-align:center;color:#9a7a50;margin-top:20px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.noscript{position:fixed;inset:30% 10%;background:white;padding:30px;z-index:30}.error-notice{position:absolute;inset:35% 10%;background:#fff9eb;padding:25px;color:#69503a;z-index:30;border-radius:16px}
+@keyframes panel-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}@keyframes toast-in{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(min-width:1250px){.app{padding-top:31px}}@media(max-width:1100px){.stage{height:590px}.home-copy{padding-left:42px}.home-copy h1{font-size:49px}.home-copy>.eyebrow{font-size:8px}.home-footnote{margin-top:24px}.mode-picker,.sail-button{width:285px}.art-note{right:14%}.release-note{font-size:6px}.feature-strip{max-width:790px}}
+@media(max-width:800px) and (min-width:641px){.app{width:calc(100% - 36px);padding-top:18px}.stage{height:550px}.home-copy{padding-left:28px;width:58%}.home-copy h1{font-size:43px}.home-copy>p{font-size:12px}.mode-picker,.sail-button{width:255px}.home-overlay{background:linear-gradient(90deg,#f6f5eef7,#f6f5eebd 43%,transparent 75%)}.art-note{font-size:18px;right:8%;top:56%}.feature-strip{gap:15px}.feature-strip span{font-size:13px}.release-note{font-size:0;letter-spacing:0}.release-note .version{font-size:8px}.release-note .status-dot{display:none}.topbar{margin-bottom:14px}}
+@media(max-width:640px){.app{width:calc(100% - 24px);padding:10px 0 18px}.topbar{height:53px;margin:0 2px 12px}.brand{gap:7px}.brand-boat{width:34px;height:33px}.brand>div>span{font-size:25px;letter-spacing:-1.2px}.brand small{font-size:5.5px;letter-spacing:1.5px;margin-top:6px}.top-actions{gap:6px}.top-actions .icon-button{width:34px;height:34px}.top-actions .icon-button .icon{width:17px;height:17px}.record{gap:4px;padding:0 4px}.record>.icon{width:16px;height:16px}.record small{font-size:5px;letter-spacing:.5px}.record strong{font-size:12px}.record strong span{font-size:9px}.divider{display:none}.stage{height:min(720px,calc(100svh - 125px));min-height:570px;border-radius:17px}.home-overlay{align-items:flex-start;text-align:center;background:linear-gradient(180deg,#f6f5eef5,#f6f5eee0 34%,#f6f5ee44 61%,transparent 80%)}.home-copy{padding:33px 20px 0;width:100%}.home-copy>.eyebrow{justify-content:center;font-size:7px;letter-spacing:1.8px}.tiny-line{width:16px}.home-copy h1{font-size:43px;letter-spacing:-1.7px;margin:15px 0 12px;line-height:1.08}.home-copy>p{font-size:11px;line-height:1.7;margin:0 0 19px}.mode-picker{width:266px;margin:0 auto 10px}.mode-picker button{padding:8px 4px 7px;font-size:11px}.mode-picker button span{font-size:5.5px;letter-spacing:.8px;margin-top:3px}.sail-button{width:266px;margin:auto;min-height:48px;padding:13px 18px;font-size:13px}.boat-picker{justify-content:center;margin-top:17px;gap:8px}.boat-picker>span{font-size:9px}.swatch{width:19px;height:19px;border-width:3px}.home-footnote{display:none}.art-note{right:10%;top:67%;font-size:18px}.art-note svg{width:40px;height:32px;margin-top:3px;margin-left:0;transform:scaleX(-1)}.home-corner{font-size:6px;right:50%;transform:translateX(50%);white-space:nowrap;bottom:17px;letter-spacing:1.6px}.scene-label{display:none}.hud{inset:15px 13px auto}.hud-left,.hud-right{gap:6px}.metric{height:49px;padding:9px 11px;border-radius:10px}.distance-metric{min-width:79px}.distance-metric small{font-size:6px;letter-spacing:1.2px;margin-bottom:2px}.metric strong{font-size:19px}.unit{font-size:10px}.stars-metric{gap:6px;padding:9px 10px}.stars-metric .icon{width:18px;height:18px}.lives{gap:3px;padding:12px 9px;height:43px;border-radius:10px}.lives .icon{width:14px;height:16px}.pause-button{width:43px;height:43px;border-radius:10px}.pause-button .icon{width:15px;height:15px}.drift-badge{height:43px;font-size:6px;letter-spacing:.4px;padding:9px 7px;gap:4px}.drift-badge .icon{width:14px;height:14px}.journey{width:170px;bottom:22px;font-size:7px}.journey>span:first-child{font-size:10px}.journey-track{margin:7px 0 6px}.touch-controls{left:13px;right:13px;bottom:20px}.touch-controls button{width:45px;height:46px;border-radius:12px}.shield-status{left:14px;top:77px;padding:8px 9px;gap:6px}.shield-status span{font-size:6px}.shield-track{width:65px}.shield-status .icon{width:16px;height:16px}.toast{top:130px;font-size:10px;padding:10px 16px}.play-hint{font-size:14px;top:25%;white-space:normal;text-align:center;width:250px}.modal-layer{padding:14px}.dialog{padding:27px 23px 20px;border-radius:20px}.dialog h2{font-size:30px}.dialog>.eyebrow{font-size:8px;letter-spacing:1.4px}.dialog>p{font-size:11px}.dialog-illustration{width:56px;height:56px;margin-bottom:18px}.dialog-illustration>svg{width:31px;height:31px}.dialog .primary-button{font-size:12px;min-height:48px;padding:13px 17px}.result-stats strong{font-size:26px}.help-dialog{padding:27px 23px 20px}.help-dialog h2{font-size:25px}.help-row{gap:10px;margin:14px 0}.help-row p{font-size:9.5px}.help-row strong{font-size:10.5px}.help-mark{width:31px;height:31px}.motion-setting{font-size:9px;margin:19px 0 16px}.help-keys{font-size:8px}.below-game{margin:13px 2px 0}.desktop-note{display:none}.mobile-note{display:flex;font-size:8px;color:#8d9e8a}.release-note{font-size:0;letter-spacing:0;gap:0}.release-note .status-dot{display:none}.version{font-size:7px;padding:2px 4px;margin:0}.feature-strip{display:none}.storage-note{font-size:8px}.text-button{font-size:10px}}
+@media(max-width:360px){.record{display:none}.home-copy h1{font-size:39px}.home-copy{padding-top:30px}.mode-picker,.sail-button{width:245px}.hud{inset:12px 10px auto}.hud-left,.hud-right{gap:4px}.metric{padding-left:8px;padding-right:8px}.lives{padding-left:6px;padding-right:6px}.journey{width:145px}}
+@media(pointer:coarse){.touch-controls{display:flex}}
+@media(max-height:600px) and (min-width:641px){.app{padding-top:8px;width:calc(100% - 32px)}.topbar{height:42px;margin-bottom:8px}.brand>div>span{font-size:26px}.brand small{font-size:6px}.brand-boat{height:33px}.stage{height:calc(100svh - 101px);min-height:320px}.home-copy{padding:20px 0 20px 32px}.home-copy h1{font-size:37px;margin:11px 0}.home-copy>p{font-size:10px;margin-bottom:12px;line-height:1.5}.mode-picker{margin-bottom:8px}.mode-picker button{padding:6px}.sail-button{padding:11px 17px;min-height:42px}.boat-picker{margin-top:13px}.home-footnote{display:none}.feature-strip{display:none}.below-game{margin-top:8px}.modal-layer{align-items:flex-start}.dialog{margin:auto;max-height:calc(100% - 8px);overflow:auto;padding-top:20px;padding-bottom:17px}.dialog-illustration{display:none}.dialog h2{font-size:26px}.dialog>p{margin-bottom:15px}.result-stats{margin:15px 0}.hud{inset:14px 18px auto}.journey{bottom:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important}}body.reduce-motion *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+
+/* Keep touch steering discoverable on small screens, including hybrid devices. */
+@media(max-width:640px){.touch-controls{display:flex}}
+
+.name-card{width:320px;max-width:100%;margin:0 0 14px;padding:10px 12px;border-radius:20px;background:#fffdf4cf;border:1px solid #ffffffa8;box-shadow:0 16px 38px -28px #244b48;color:var(--ink)}.name-card label{display:block;margin-bottom:7px;font-size:8px;font-weight:900;letter-spacing:1.6px;text-transform:uppercase;color:#67817b}.name-card input{width:100%;border:1px solid #dfe5d4;border-radius:999px;background:#fffef8;padding:10px 13px;color:var(--ink);font:900 13px 'Trebuchet MS',Arial,sans-serif;letter-spacing:.4px}.name-card input::placeholder{color:#97a9a4;font-weight:700}.name-card small{display:block;margin-top:6px;color:#7a918b;font-size:9px;font-weight:700;line-height:1.35}
+
+.wetness-status{position:absolute;left:18px;top:78px;display:flex;align-items:center;gap:9px;min-width:164px;padding:8px 11px;border-radius:999px;background:#f8fff0e6;border:1px solid #ffffff8f;box-shadow:0 12px 32px -18px #214a4a;color:#315956;font-size:9px;font-weight:900;letter-spacing:1.4px;z-index:7;backdrop-filter:blur(8px)}.wetness-status .icon{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2}.wetness-status>div{flex:1}.wetness-status span{display:block}.wetness-track{height:6px;margin-top:4px;border-radius:999px;overflow:hidden;background:#dbe7df}.wetness-track i{display:block;height:100%;width:100%;transform-origin:left center;transform:scaleX(0);background:linear-gradient(90deg,#85c5c9,#3d8796,#244f65);border-radius:inherit;transition:transform .18s ease}.wetness-value{min-width:34px;text-align:right;color:#396d74}.wetness-status.warning{background:#fff6e4ed;color:#79543c}.wetness-status.warning .wetness-track i{background:linear-gradient(90deg,#e4b665,#d77b60,#9b4d4f)}.wetness-status.umbrella{background:#f3ffe8ee;color:#3f6b54}.umbrella-note{font-size:7px;letter-spacing:1.1px;color:#5e8b67;margin-top:2px}
+@media(max-width:640px){.wetness-status{left:12px;top:65px;min-width:142px;padding:7px 9px;font-size:8px}.wetness-value{min-width:30px}}
+
+</style>
+</head>
+<body>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-boat" viewBox="0 0 48 40"><path d="m4 19 20 7 20-7-10 15-10 4-10-4Z" fill="currentColor"/><path d="m24 2 14 18-14 6-12-6Z" fill="currentColor" opacity=".58"/><path d="M24 3v34" fill="none" stroke="#fff9ed" stroke-width="1.3" opacity=".7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.4.9-4.6 4.5 1.1 6.4L12 17.3l-5.7 3.1 1.1-6.4-4.6-4.5 6.4-.9Z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-9-5.3-9-11A5 5 0 0 1 12 6a5 5 0 0 1 9 3c0 5.7-9 11-9 11Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 4.6-8 9-8 9s-8-4.4-8-9V6Z"/><path d="m8 12 2.6 2.6L16 9"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="3.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="m11 4-5 4H3v8h3l5 4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="m11 4-5 4H3v8h3l5 4Zm5 5 5 6m0-6-5 6"/></symbol>
+    <symbol id="i-volume-down" viewBox="0 0 24 24"><path d="m11 4-5 4H3v8h3l5 4Zm6 6a4 4 0 0 1 0 4"/></symbol>
+    <symbol id="i-volume-up" viewBox="0 0 24 24"><path d="m11 4-5 4H3v8h3l5 4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/><path d="M19 8v8M15 12h8"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 1.5-2.5 1.7-2.5 3.5m0 3h.01"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3h10v7a5 5 0 0 1-10 0Zm0 2H3v3a4 4 0 0 0 4 4m10-7h4v3a4 4 0 0 1-4 4m-5 3v5m-4 1h8"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 3S6 1 4 10s8 13 13 5c2-4 3-12 3-12ZM4 21 16 8"/></symbol>
+    <symbol id="i-tape" viewBox="0 0 24 24"><path d="M4 15 15 4l5 5L9 20H4Z"/><path d="m14 6 4 4M7 16l1 1m2-4 1 1m2-4 1 1"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8m-16-1v11h5v-7h4v7h5V10"/></symbol>
+  </svg>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" id="brandLink" aria-label="Paper Boat home"><svg class="brand-boat"><use href="#i-boat"/></svg><div><span>paper boat<span class="brand-dot">.</span></span><small>A LITTLE RIVER ADVENTURE</small></div></a>
+      <div class="top-actions">
+        <div class="record" aria-label="Your longest river run"><svg class="icon"><use href="#i-trophy"/></svg><div><small>PERSONAL BEST</small><strong id="headerBest">0 <span>m</span></strong></div></div>
+        <span class="divider"></span>
+        <button class="icon-button" id="soundButton" type="button" aria-label="Turn sound on" aria-pressed="false" title="Sound (M)"><svg class="icon"><use id="soundIcon" href="#i-mute"/></svg></button>
+        <button class="icon-button" id="volumeDownButton" type="button" aria-label="Decrease music volume" title="Volume down"><svg class="icon"><use href="#i-volume-down"/></svg></button>
+        <button class="icon-button" id="volumeUpButton" type="button" aria-label="Increase music volume" title="Volume up"><svg class="icon"><use href="#i-volume-up"/></svg></button>
+        <button class="icon-button" id="helpButton" type="button" aria-label="How to play" title="How to play"><svg class="icon"><use href="#i-help"/></svg></button>
+      </div>
+    </header>
+
+    <section class="stage" id="stage" data-state="menu" aria-label="Paper Boat game">
+      <canvas id="game" tabindex="0" aria-label="Paper Boat river game. Use arrow keys or W A S D to steer. P pauses. On a touchscreen, drag anywhere on the river.">Your browser needs HTML Canvas to play Paper Boat.</canvas>
+      <div class="scene-label" id="sceneLabel"><span class="live-dot"></span><span id="sceneName">THE MEADOWS</span></div>
+
+      <div class="hud" id="hud" hidden>
+        <div class="hud-left">
+          <div class="metric distance-metric"><small>JOURNEY</small><strong><span id="distance">0</span><span class="unit">m</span></strong></div>
+          <div class="metric stars-metric"><svg class="icon gold"><use href="#i-star"/></svg><strong id="stars">0</strong></div>
+        </div>
+        <div class="hud-right">
+          <div class="lives" id="lives" aria-label="3 of 3 hearts"><svg class="icon"><use href="#i-heart"/></svg><svg class="icon"><use href="#i-heart"/></svg><svg class="icon"><use href="#i-heart"/></svg></div>
+          <div class="drift-badge" id="driftBadge" hidden><svg class="icon"><use href="#i-leaf"/></svg><span>JUST DRIFT</span></div>
+          <button class="pause-button" id="pauseButton" aria-label="Pause game" title="Pause (P / Esc)"><svg class="icon"><use href="#i-pause"/></svg></button>
+        </div>
+      </div>
+      <div class="shield-status" id="shieldStatus" hidden><svg class="icon"><use href="#i-shield"/></svg><div><span>SAFE &amp; SOUND</span><div class="shield-track"><i id="shieldFill"></i></div></div></div>
+      <div class="wetness-status" id="wetnessStatus" hidden><svg class="icon"><use href="#i-leaf"/></svg><div><span>WETNESS</span><div class="wetness-track"><i id="wetnessFill"></i></div><small class="umbrella-note" id="umbrellaNote" hidden>LEAF UMBRELLA</small></div><strong class="wetness-value" id="wetnessValue">0%</strong></div>
+      <div class="toast" id="toast" role="status" hidden></div>
+      <div class="play-hint" id="playHint" hidden>Follow the stars. Find your own flow.</div>
+      <div class="journey" id="journey" hidden><span id="journeyName">The Meadows</span><div class="journey-track"><i id="journeyFill"></i></div><span id="journeyNext">500 m to Golden Grove</span></div>
+      <div class="touch-controls" id="touchControls" hidden><button data-steer="-1" aria-label="Steer left"><svg class="icon"><use href="#i-arrow"/></svg></button><button data-steer="1" aria-label="Steer right"><svg class="icon"><use href="#i-arrow"/></svg></button></div>
+
+      <div class="home-overlay" id="homeScreen">
+        <div class="home-copy">
+          <div class="eyebrow"><span class="tiny-line"></span> SMALL BOAT. WIDE WORLD.</div>
+          <h1>A little paper.<br>A big <em>adventure.</em></h1>
+          <p>Follow the current. Catch the stars.<br>See where the river takes you.</p>
+          <div class="mode-picker" role="group" aria-label="Game mode"><button id="runMode" class="selected" aria-pressed="true">River run <span>THE ADVENTURE</span></button><button id="driftMode" aria-pressed="false">Just drift <span>NO BUMPS. NO RUSH.</span></button></div>
+          <div class="name-card"><label for="captainName">Engrave your boat</label><input id="captainName" type="text" autocomplete="name" maxlength="18" placeholder="Your name" aria-describedby="captainNameHint"><small id="captainNameHint">Add your name before the boat leaves the riverbank.</small></div>
+          <button class="primary-button sail-button" id="startButton">Let&rsquo;s sail <svg class="icon"><use href="#i-arrow"/></svg></button>
+          <div class="boat-picker"><span>Your little boat</span><button class="swatch selected" data-color="0" aria-label="Coral boat accents" aria-pressed="true"></button><button class="swatch" data-color="1" aria-label="Teal boat accents" aria-pressed="false"></button><button class="swatch" data-color="2" aria-label="Golden boat accents" aria-pressed="false"></button></div>
+          <div class="home-footnote"><svg class="icon"><use href="#i-leaf"/></svg> A small escape, made of paper.</div>
+        </div>
+        <div class="art-note"><span>Away we go</span><svg viewBox="0 0 90 60" aria-hidden="true"><path d="M5 8Q70-5 65 48m-12-8 12 10 10-11"/></svg></div>
+        <div class="home-corner">EST. FOR THE JOY OF IT <span>&#10022;</span></div>
+      </div>
+
+      <div class="modal-layer" id="pauseScreen" hidden>
+        <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="pauseTitle">
+          <div class="dialog-illustration"><svg><use href="#i-leaf"/></svg></div><div class="eyebrow">A MOMENT TO BREATHE</div><h2 id="pauseTitle">The river can wait.</h2><p>Your voyage is right where you left it.</p>
+          <button class="primary-button" id="resumeButton">Keep sailing <svg class="icon"><use href="#i-play"/></svg></button>
+          <button class="text-button" id="finishButton">Finish this voyage</button>
+          <div class="dialog-footnote">P or Esc to return to the river</div>
+        </section>
+      </div>
+
+      <div class="modal-layer" id="endScreen" hidden>
+        <section class="dialog end-dialog" role="dialog" aria-modal="true" aria-labelledby="endTitle">
+          <div class="dialog-illustration gold"><svg><use href="#i-boat"/></svg></div><div class="eyebrow" id="endEyebrow">EVERY LITTLE JOURNEY COUNTS</div><h2 id="endTitle">That was lovely.</h2><p id="endMessage">A little braver. A little farther. A little more you.</p>
+          <div class="result-stats"><div><strong id="endDistance">0<span>m</span></strong><small>SAILED</small></div><div><strong id="endStars">0</strong><small>STARS</small></div><div><strong id="endScore">0</strong><small>SCORE</small></div></div>
+          <div class="result-best" id="resultBest"><svg class="icon"><use href="#i-trophy"/></svg><span id="endBest">Longest journey: 0 m</span></div>
+          <button class="primary-button" id="againButton">One more adventure <svg class="icon"><use href="#i-arrow"/></svg></button><button class="text-button" id="homeButton">Back to the riverbank</button>
+        </section>
+      </div>
+
+      <div class="modal-layer" id="helpScreen" hidden>
+        <section class="dialog help-dialog" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+          <button class="icon-button dialog-close" id="closeHelpButton" aria-label="Close instructions"><svg class="icon"><use href="#i-close"/></svg></button>
+          <div class="eyebrow">FIND YOUR FLOW</div><h2 id="helpTitle">A few gentle pointers.</h2>
+          <div class="help-row"><span class="help-mark"><svg class="icon"><use href="#i-boat"/></svg></span><div><strong>You&rsquo;re the captain.</strong><p>Arrow keys or WASD to steer. On touchscreens, drag anywhere on the river or use the arrow buttons.</p></div></div>
+          <div class="help-row"><span class="help-mark gold"><svg class="icon"><use href="#i-star"/></svg></span><div><strong>A little stardust.</strong><p>Every star earns 25 points. Every meter earns 1. Follow the trails through the clear water.</p></div></div>
+          <div class="help-row"><span class="help-mark coral"><svg class="icon"><use href="#i-heart"/></svg></span><div><strong>Paper is precious.</strong><p>Avoid rocks and logs. You have 3 hearts; floating hearts restore one. Ducks and lilies are just scenery.</p></div></div>
+          <div class="help-row"><span class="help-mark"><svg class="icon"><use href="#i-shield"/></svg></span><div><strong>Safe &amp; sound.</strong><p>A shield keeps you safe for 7 seconds. Just drift mode has no damage or competitive records.</p></div></div>
+          <div class="help-row"><span class="help-mark"><svg class="icon"><use href="#i-leaf"/></svg></span><div><strong>Rain after level 4.</strong><p>Rain, waves and splashes fill the wetness meter and make the boat sit lower in the water. Thunder can scorch the paper; catch tape rolls to patch burn marks.</p></div></div>
+          <label class="motion-setting"><input type="checkbox" id="motionSetting"> Reduce decorative motion &amp; screen shake</label>
+          <div class="help-keys"><span><kbd>P</kbd> / <kbd>Esc</kbd> pause</span><span><kbd>M</kbd> music &amp; sound</span></div>
+          <button class="primary-button" id="helpDoneButton">Got it <svg class="icon"><use href="#i-arrow"/></svg></button>
+        </section>
+      </div>
+      <div class="error-notice" id="errorNotice" role="alert" hidden></div>
+    </section>
+
+    <footer class="below-game">
+      <div class="control-note desktop-note"><span class="key-pair"><kbd>&larr;</kbd><kbd>&uarr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd></span><span>or <strong>WASD</strong> to steer</span><span class="note-dot">&middot;</span><kbd>P</kbd><span>to pause</span></div>
+      <div class="control-note mobile-note">Drag on the river to steer. Make a little headway.</div>
+      <div class="release-note"><span class="status-dot"></span> OFFLINE FRIENDLY. A LITTLE LESS NOISE. <span class="version">v1.0</span></div>
+    </footer>
+    <div class="feature-strip" aria-hidden="true"><div><svg class="icon"><use href="#i-star"/></svg><span>Chase a little wonder</span><small>Catch stars along the way</small></div><div><svg class="icon"><use href="#i-leaf"/></svg><span>Take the scenic route</span><small>Three places, one winding river</small></div><div><svg class="icon"><use href="#i-heart"/></svg><span>Come as you are</span><small>A challenge, or just a quiet drift</small></div></div>
+    <p class="storage-note" id="storageNote" hidden>Browser storage is unavailable. Your records will last for this session only.</p>
+    <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
+  </main>
+  <noscript><p class="noscript">Please enable JavaScript to take your paper boat out on the river.</p></noscript>
+  <script>
+/*
+ * Paper Boat 1.0.0
+ * A dependency-free Canvas 2D game. All art is generated locally, with optional sound effects and music.
+ * Sections: persistence/audio, state/input, simulation, illustration, boot.
+ */
+(() => {
+  'use strict';
+
+  const $ = id => document.getElementById(id);
+  const canvas = $('game');
+  // Prefer a software-backed 2D surface: stable on high-DPI mobile compositors.
+  const ctx = canvas.getContext('2d', { alpha: false, willReadFrequently: true });
+  if (!ctx) {
+    $('errorNotice').hidden = false;
+    $('errorNotice').textContent = 'This browser cannot draw the river. Please open the game in a browser with Canvas 2D support.';
+    return;
+  }
+  const TAU = Math.PI * 2;
+  const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const seeded = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  const smooth = (rate, dt) => 1 - Math.exp(-rate * dt);
+  const fmt = n => Math.floor(n).toLocaleString('en-US');
+  const cleanBoatName = value => String(value || '').replace(/\s+/g, ' ').trim().slice(0, 18);
+  const RAIN_START_DISTANCE = 2400;
+  const STORAGE_KEY = 'paper-boat-v1';
+  const MAX_SAVED = 999999999;
+  const intValue = (n, fallback = 0) => Number.isFinite(n) ? clamp(Math.floor(n), 0, MAX_SAVED) : fallback;
+  const osReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let storageAvailable = true;
+  let profile = { bestDistance: 0, bestScore: 0, voyages: 0, sound: false, volume: .65, color: 0, reducedMotion: osReducedMotion, captainName: '' };
+  try {
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null'); }
+    catch (_) { /* A malformed old record should not disable working storage. */ }
+    if (saved && typeof saved === 'object') {
+      profile.bestDistance = intValue(saved.bestDistance);
+      profile.bestScore = intValue(saved.bestScore);
+      profile.voyages = intValue(saved.voyages);
+      profile.color = clamp(intValue(saved.color), 0, 2);
+      profile.sound = saved.sound === true;
+      profile.volume = Number.isFinite(Number(saved.volume)) ? clamp(Number(saved.volume), 0, 1) : .65;
+      profile.reducedMotion = typeof saved.reducedMotion === 'boolean' ? saved.reducedMotion : osReducedMotion;
+      profile.captainName = cleanBoatName(saved.captainName);
+    } else {
+      // Preserve the longest journey from the earlier prototype, when available.
+      profile.bestDistance = intValue(Number(localStorage.getItem('paperBoatBest')));
+    }
+    localStorage.setItem('paper-boat-storage-test', '1');
+    localStorage.removeItem('paper-boat-storage-test');
+  } catch (_) { storageAvailable = false; }
+
+  function saveProfile() {
+    if (!storageAvailable) return;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(profile)); }
+    catch (_) { storageAvailable = false; $('storageNote').hidden = false; }
+  }
+
+  // Web Audio and music playback are initialized only after a user gesture.
+  let audio = null, master = null;
+  const musicTracks = ['Boat on the River.mp3', 'Vrishank, Sail Away.mp3'];
+  const MUSIC_CROSSFADE = 6;
+  const MUSIC_MAX_VOLUME = .42;
+  let musicPlayers = [], musicTrack = 0, activeMusic = 0, musicMonitorFrame = 0, musicFadeFrame = 0, musicTransitioning = false;
+  const targetMusicVolume = () => profile.sound ? profile.volume * MUSIC_MAX_VOLUME : 0;
+  function setEffectVolume() {
+    if (master && audio) master.gain.setTargetAtTime(profile.sound ? .14 * profile.volume : 0, audio.currentTime, .02);
+  }
+  function prepareMusic() {
+    if (musicPlayers.length) return;
+    musicPlayers = [0, 1].map(() => {
+      const player = new Audio();
+      player.preload = 'auto'; player.volume = 0;
+      player.addEventListener('ended', () => { if (!musicTransitioning) startMusicTransition(true); });
+      return player;
+    });
+  }
+  function loadMusic(player, index) {
+    const src = encodeURI(musicTracks[index]);
+    if (!player.src.endsWith(src)) { player.src = src; player.load(); }
+  }
+  function monitorMusic() {
+    cancelAnimationFrame(musicMonitorFrame);
+    const tick = () => {
+      if (!profile.sound || !musicPlayers.length) return;
+      const current = musicPlayers[activeMusic];
+      if (!musicTransitioning && current && Number.isFinite(current.duration) && current.duration > MUSIC_CROSSFADE && current.duration - current.currentTime <= MUSIC_CROSSFADE) startMusicTransition();
+      musicMonitorFrame = requestAnimationFrame(tick);
+    };
+    musicMonitorFrame = requestAnimationFrame(tick);
+  }
+  function playMusic() {
+    if (!profile.sound) return;
+    prepareMusic();
+    const current = musicPlayers[activeMusic];
+    loadMusic(current, musicTrack); current.volume = targetMusicVolume();
+    current.play().then(monitorMusic).catch(() => {});
+  }
+  function pauseMusic() {
+    cancelAnimationFrame(musicMonitorFrame); cancelAnimationFrame(musicFadeFrame); musicTransitioning = false;
+    for (const player of musicPlayers) { player.pause(); player.volume = 0; }
+  }
+  function startMusicTransition(force = false) {
+    if (!profile.sound) return;
+    prepareMusic();
+    if (musicTransitioning && !force) return;
+    cancelAnimationFrame(musicFadeFrame); musicTransitioning = true;
+    const from = musicPlayers[activeMusic], nextSlot = activeMusic ? 0 : 1, to = musicPlayers[nextSlot];
+    musicTrack = (musicTrack + 1) % musicTracks.length; loadMusic(to, musicTrack); to.currentTime = 0; to.volume = 0;
+    const started = performance.now(), fromStart = force ? 0 : from.volume;
+    to.play().then(() => {
+      const fade = now => {
+        const t = clamp((now - started) / (MUSIC_CROSSFADE * 1000), 0, 1), target = targetMusicVolume();
+        from.volume = fromStart * (1 - t); to.volume = target * t;
+        if (t < 1 && profile.sound) { musicFadeFrame = requestAnimationFrame(fade); return; }
+        from.pause(); from.currentTime = 0; from.volume = 0; to.volume = targetMusicVolume();
+        activeMusic = nextSlot; musicTransitioning = false; monitorMusic();
+      };
+      musicFadeFrame = requestAnimationFrame(fade);
+    }).catch(() => { musicTransitioning = false; });
+  }
+  function updateMusicVolume() {
+    setEffectVolume();
+    if (!musicPlayers.length) return;
+    if (!musicTransitioning) musicPlayers[activeMusic].volume = targetMusicVolume();
+  }
+  function unlockAudio() {
+    if (!profile.sound) return;
+    try {
+      if (!audio) {
+        const Audio = window.AudioContext || window.webkitAudioContext;
+        if (Audio) {
+          audio = new Audio(); master = audio.createGain();
+          master.gain.value = .14 * profile.volume; master.connect(audio.destination);
+        }
+      }
+      if (audio && audio.state === 'suspended') audio.resume().catch(() => {});
+      playMusic();
+    } catch (_) { /* Sound is optional; never interrupt the voyage. */ }
+  }
+  const notes = {
+    start: [[440, 0, .22], [554, .10, .22], [659, .20, .36]],
+    star: [[880, 0, .12], [1174.66, .06, .22]],
+    shield: [[523, 0, .2], [659, .09, .2], [784, .18, .4]],
+    heart: [[659, 0, .17], [784, .1, .17], [1046, .2, .3]],
+    hit: [[130, 0, .22], [98, .08, .26]],
+    end: [[659, 0, .32], [554, .18, .32], [440, .36, .6]],
+    landmark: [[523, 0, .3], [659, .12, .3], [784, .24, .4], [1046, .40, .5]],
+    thunder: [[64, 0, .34], [48, .11, .46], [92, .25, .4]],
+    repair: [[392, 0, .14], [523, .08, .18], [784, .18, .28]],
+    click: [[659, 0, .12]]
+  };
+  function sound(name) {
+    if (!profile.sound || !audio || audio.state !== 'running') return;
+    try {
+      for (const [hz, delay, duration] of notes[name] || notes.click) {
+        const osc = audio.createOscillator(), gain = audio.createGain();
+        const when = audio.currentTime + delay;
+        osc.type = name === 'hit' || name === 'thunder' ? 'triangle' : 'sine';
+        osc.frequency.setValueAtTime(hz, when);
+        gain.gain.setValueAtTime(0, when);
+        gain.gain.linearRampToValueAtTime(name === 'hit' ? .28 : name === 'thunder' ? .20 : .37, when + .012);
+        gain.gain.exponentialRampToValueAtTime(.001, when + duration);
+        osc.connect(gain); gain.connect(master); osc.start(when); osc.stop(when + duration + .02);
+        osc.onended = () => { osc.disconnect(); gain.disconnect(); };
+      }
+    } catch (_) { /* Some browsers suspend audio when a tab loses focus. */ }
+  }
+  function updateSoundButton() {
+    $('soundIcon').setAttribute('href', profile.sound ? '#i-sound' : '#i-mute');
+    $('soundButton').setAttribute('aria-pressed', String(profile.sound));
+    $('soundButton').setAttribute('aria-label', profile.sound ? 'Turn music and sound off' : 'Turn music and sound on');
+    $('soundButton').title = `Music and sound (M) - ${Math.round(profile.volume * 100)}%`;
+    $('volumeDownButton').disabled = profile.volume <= .01;
+    $('volumeUpButton').disabled = profile.volume >= .99;
+    $('volumeDownButton').setAttribute('aria-label', `Decrease music volume. Current volume ${Math.round(profile.volume * 100)} percent`);
+    $('volumeUpButton').setAttribute('aria-label', `Increase music volume. Current volume ${Math.round(profile.volume * 100)} percent`);
+    updateMusicVolume();
+  }
+  function toggleSound() {
+    profile.sound = !profile.sound;
+    if (profile.sound) unlockAudio(); else pauseMusic();
+    updateSoundButton(); saveProfile(); sound('click');
+  }
+  function changeVolume(delta) {
+    profile.volume = clamp(Math.round((profile.volume + delta) * 100) / 100, 0, 1);
+    if (!profile.sound && profile.volume > 0) profile.sound = true;
+    unlockAudio(); updateSoundButton(); saveProfile(); sound('click');
+  }
+
+  const accents = [
+    { flag: '#d98166', light: '#eba68b', stripe: '#568e9d' },
+    { flag: '#418c8c', light: '#74b1a0', stripe: '#458f86' },
+    { flag: '#d2a54b', light: '#f0ca77', stripe: '#bb9657' }
+  ];
+  const palettes = [
+    { name: 'The Meadows', sky: '#d7e9e2', skyLow: '#edf0d9', far: '#b1c9ad', hill: '#87b39a', hillDark: '#669b85', grass: '#a9c38e', grassLight: '#d0d5a5', edge: '#e0dcb1', water: '#a2d7cc', waterDeep: '#3a8b94', leaf: '#5e9275', leafLight: '#89ae7b', leafDark: '#3e7867', flower: '#f6dba0', sun: '#f5d9a5' },
+    { name: 'Golden Grove', sky: '#ede1c8', skyLow: '#f6ead0', far: '#c6c6a0', hill: '#b7b58c', hillDark: '#989e77', grass: '#c8c58c', grassLight: '#e4d4a0', edge: '#eddfb4', water: '#b1d6bf', waterDeep: '#548f8b', leaf: '#b4a465', leafLight: '#d5be73', leafDark: '#8d9460', flower: '#eab98a', sun: '#f2ca85' },
+    { name: 'Moonlit Bend', sky: '#9fb9c2', skyLow: '#d2d6ca', far: '#99b0b1', hill: '#719e9d', hillDark: '#5e8588', grass: '#83a69b', grassLight: '#abbfaa', edge: '#c4d2bd', water: '#94c6c8', waterDeep: '#397b90', leaf: '#598c83', leafLight: '#81a79a', leafDark: '#386a70', flower: '#e4dfb4', sun: '#f8efd2' }
+  ];
+  const colorKeys = Object.keys(palettes[0]).filter(k => k !== 'name');
+  function blendHex(a, b, t) {
+    const aa = parseInt(a.slice(1), 16), bb = parseInt(b.slice(1), 16);
+    const r = Math.round(lerp(aa >> 16, bb >> 16, t));
+    const g = Math.round(lerp((aa >> 8) & 255, (bb >> 8) & 255, t));
+    const bl = Math.round(lerp(aa & 255, bb & 255, t));
+    return `rgb(${r},${g},${bl})`;
+  }
+  function regionAt(d) {
+    const cycle = Math.floor(d / 2200), local = d % 2200;
+    const index = local < 500 ? 0 : local < 1200 ? 1 : 2;
+    const start = cycle * 2200 + [0, 500, 1200][index];
+    const end = cycle * 2200 + [500, 1200, 2200][index];
+    return { index, start, end, key: cycle * 3 + index, next: (index + 1) % 3 };
+  }
+  function paletteAt(d) {
+    const r = regionAt(d), next = palettes[r.next], base = palettes[r.index];
+    const t = clamp((d - r.end + 110) / 110, 0, 1);
+    if (t === 0) return base;
+    const out = { name: base.name };
+    for (const k of colorKeys) out[k] = blendHex(base[k], next[k], t);
+    return out;
+  }
+
+  // World coordinates: u is across the river (-1..1); q is depth (0=horizon).
+  let W = 1000, H = 550, unit = 1, portrait = false, dpr = 1;
+  let state = 'menu', mode = 'run', helpOpen = false, focusBeforeHelp = null;
+  let clock = 0, travel = 0, menuBlend = 1, lastFrame = 0;
+  let runTime = 0, distance = 0, stars = 0, lives = 3;
+  let waveTimer = .65, pickupTimer = 10, waveCount = 0, safeLane = 1;
+  let shield = 0, shake = 0, toastTimer = 0, hudTimer = 0, lastRegion = 0;
+  let wetness = 0, umbrella = 0, burnDamage = 0, leafTimer = 8, tapeTimer = 16, thunderTimer = 12, lightningFlash = 0, rainAnnounced = false;
+  let manualFrames = false, completed = false;
+  const boat = { u: 0, q: .745, vx: 0, vy: 0, tilt: 0, invulnerable: 0 };
+  const keys = new Set();
+  const touchDirections = new Map();
+  let pointer = null;
+  const objects = [], particles = [], floatTexts = [];
+  const UI = {
+    distance: $('distance'), stars: $('stars'), lives: $('lives'), hud: $('hud'),
+    shield: $('shieldStatus'), shieldFill: $('shieldFill'), journey: $('journey'),
+    journeyName: $('journeyName'), journeyFill: $('journeyFill'), journeyNext: $('journeyNext'),
+    wetness: $('wetnessStatus'), wetnessFill: $('wetnessFill'), wetnessValue: $('wetnessValue'), umbrellaNote: $('umbrellaNote')
+  };
+
+  function rainActive() { return mode === 'run' && distance >= RAIN_START_DISTANCE; }
+
+  function project(q, u = 0) {
+    const p = Math.pow(Math.max(0, q), 1.65);
+    const homeCenter = portrait ? .5 : .715;
+    const nearCenter = lerp(.50, homeCenter, menuBlend);
+    const bend = Math.sin(p * 3.6 + travel * .35) * .052 * Math.sin(Math.PI * clamp(p, 0, 1));
+    const center = W * (lerp(portrait ? .47 : .54, nearCenter, p) + bend);
+    const half = W * (.023 + (portrait ? .47 : .43) * p);
+    return { x: center + u * half, y: H * (.30 + .79 * p), half, center, scale: (.16 + p * 1.28) * unit };
+  }
+  function qFromY(y) { return Math.pow(Math.max(0, (y / H - .30) / .79), 1 / 1.65); }
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return;
+    portrait = rect.width < 640 && rect.height > rect.width;
+    W = portrait ? 560 : 1000; H = W * rect.height / rect.width; unit = portrait ? .98 : 1;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const nextWidth = Math.round(rect.width * dpr), nextHeight = Math.round(rect.height * dpr);
+    if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
+      canvas.width = nextWidth; canvas.height = nextHeight;
+    }
+    // Pointer deltas have a different scale after rotation or resize.
+    pointer = null;
+  }
+  new ResizeObserver(resize).observe($('stage'));
+  window.addEventListener('resize', resize);
+
+  function announce(text) { $('announcer').textContent = text; }
+  function toast(text, duration = 2.7) { $('toast').textContent = text; $('toast').hidden = false; toastTimer = duration; announce(text); }
+  function clearInput() { keys.clear(); touchDirections.clear(); pointer = null; boat.vx = 0; boat.vy = 0; }
+  function focusCanvas() { try { canvas.focus({ preventScroll: true }); } catch (_) { canvas.focus(); } }
+  function setState(next) {
+    state = next; $('stage').dataset.state = next; clearInput();
+    $('homeScreen').hidden = next !== 'menu';
+    $('pauseScreen').hidden = next !== 'paused';
+    $('endScreen').hidden = next !== 'ended';
+    UI.hud.hidden = next === 'menu';
+    UI.journey.hidden = next !== 'playing';
+    $('touchControls').hidden = next !== 'playing';
+    $('pauseButton').disabled = next !== 'playing';
+    $('playHint').hidden = next !== 'playing' || runTime > 5;
+    if (next !== 'playing') { $('toast').hidden = true; UI.shield.hidden = true; UI.wetness.hidden = true; }
+    if (next === 'playing') focusCanvas();
+    if (next === 'paused') $('resumeButton').focus({ preventScroll: true });
+    if (next === 'ended') $('againButton').focus({ preventScroll: true });
+    if (next === 'menu') $('startButton').focus({ preventScroll: true });
+  }
+  function refreshHeader() { $('headerBest').innerHTML = `${fmt(profile.bestDistance)} <span>m</span>`; }
+  function selectMode(next) {
+    mode = next;
+    $('runMode').classList.toggle('selected', mode === 'run');
+    $('driftMode').classList.toggle('selected', mode === 'drift');
+    $('runMode').setAttribute('aria-pressed', String(mode === 'run'));
+    $('driftMode').setAttribute('aria-pressed', String(mode === 'drift'));
+  }
+  function selectColor(index) {
+    profile.color = clamp(index, 0, 2);
+    document.querySelectorAll('.swatch').forEach((el, i) => {
+      el.classList.toggle('selected', i === profile.color);
+      el.setAttribute('aria-pressed', String(i === profile.color));
+    });
+    saveProfile();
+  }
+  function updateBoatName() {
+    profile.captainName = cleanBoatName($('captainName').value);
+    $('captainName').value = profile.captainName;
+    saveProfile(); render();
+  }
+  function start() {
+    if (helpOpen) return;
+    updateBoatName();
+    if (!profile.captainName) {
+      toast('Please add your name before we sail.');
+      $('captainName').focus({ preventScroll: true });
+      return;
+    }
+    unlockAudio();
+    distance = 0; stars = 0; lives = 3; runTime = 0; waveCount = 0; safeLane = 1;
+    waveTimer = .6; pickupTimer = 10; leafTimer = 8; tapeTimer = 16; thunderTimer = 12; shield = 0; umbrella = 0; wetness = 0; burnDamage = 0; lightningFlash = 0; shake = 0; lastRegion = 0; rainAnnounced = false; completed = false;
+    objects.length = 0; particles.length = 0; floatTexts.length = 0;
+    Object.assign(boat, { u: 0, q: .745, vx: 0, vy: 0, tilt: 0, invulnerable: 0 });
+    toastTimer = 0; UI.lives.hidden = mode === 'drift'; $('driftBadge').hidden = mode !== 'drift';
+    setState('playing'); updateHUD(); sound('start');
+    announce(mode === 'run' ? 'River run started. Three hearts. Arrow keys or WASD to steer.' : 'Just drift started. Relax and explore; there is no damage.');
+  }
+  function pause() { if (state === 'playing') { setState('paused'); announce('Game paused.'); } }
+  function resume() { if (state === 'paused' && !helpOpen) { unlockAudio(); setState('playing'); announce('Back on the river.'); } }
+  function togglePause() { if (helpOpen) return; state === 'playing' ? pause() : state === 'paused' ? resume() : null; }
+  function finish(reason = 'voyage') {
+    if (completed || !['playing', 'paused'].includes(state)) return;
+    completed = true;
+    const meters = Math.floor(distance), score = meters + stars * 25;
+    const record = mode === 'run' && meters > profile.bestDistance;
+    const sunk = reason === 'sunk';
+    if (mode === 'run') {
+      profile.bestDistance = Math.max(profile.bestDistance, meters);
+      profile.bestScore = Math.max(profile.bestScore, score); profile.voyages++; saveProfile();
+    }
+    $('endDistance').innerHTML = `${fmt(meters)}<span>m</span>`;
+    $('endStars').textContent = fmt(stars); $('endScore').textContent = fmt(score);
+    $('endEyebrow').textContent = sunk ? 'SOAKED THROUGH' : record ? 'A NEW PERSONAL BEST' : mode === 'drift' ? 'NOWHERE TO BE. NOTHING TO PROVE.' : 'EVERY LITTLE JOURNEY COUNTS';
+    $('endTitle').textContent = sunk ? 'The little boat sank.' : record ? 'Look how far you went.' : mode === 'drift' ? 'A lovely little escape.' : 'That was lovely.';
+    $('endMessage').textContent = sunk ? 'Rain and splashes filled the wetness meter. Find leaf umbrellas after level 4 to stay dry.' : record ? 'Your little boat has never been farther.' : 'A little braver. A little farther. A little more you.';
+    $('endBest').textContent = mode === 'drift' ? 'Just drift voyages do not change your records.' : `Longest journey: ${fmt(profile.bestDistance)} m`;
+    refreshHeader(); updateHUD(); setState('ended'); sound('end');
+    announce(sunk ? `The boat sank after ${meters} meters with ${wetness.toFixed(0)} percent wetness.` : `Voyage complete. ${meters} meters, ${stars} stars, ${score} points.${record ? ' New personal best!' : ''}`);
+  }
+  function goHome() {
+    if (helpOpen) closeHelp();
+    if (state === 'playing' || state === 'paused') { pause(); return; }
+    objects.length = 0; particles.length = 0; floatTexts.length = 0;
+    distance = 0; shield = 0; umbrella = 0; wetness = 0; burnDamage = 0; lightningFlash = 0; shake = 0; boat.tilt = 0; boat.invulnerable = 0;
+    setState('menu');
+  }
+
+  function addWetness(amount) {
+    if (mode !== 'run' || completed) return;
+    wetness = clamp(wetness + amount, 0, 100);
+    if (wetness >= 100) finish('sunk');
+  }
+  function addBurn(amount) {
+    if (mode !== 'run' || completed) return;
+    burnDamage = clamp(burnDamage + amount, 0, 85);
+  }
+  function repairBurn(amount) {
+    if (mode !== 'run' || completed) return false;
+    const before = burnDamage;
+    burnDamage = clamp(burnDamage - amount, 0, 85);
+    return burnDamage < before;
+  }
+  function thunderStrike() {
+    if (!rainActive() || state !== 'playing') return;
+    lightningFlash = profile.reducedMotion ? .18 : .38;
+    shake = Math.max(shake, profile.reducedMotion ? 0 : .42);
+    addBurn(rand(8, 15) * (umbrella > 0 ? .6 : 1));
+    const b = project(boat.q, boat.u);
+    burst(b.x + rand(-20, 20) * b.scale, b.y - 56 * b.scale, '#f0a35d', 18, 125);
+    if (burnDamage > 18 && objects.filter(o => o.type === 'tape' && !o.used).length < 2) {
+      addObject('tape', lanes[safeLane], -.20);
+      tapeTimer = rand(7, 10);
+    }
+    sound('thunder'); toast('Thunder scorched the paper! Catch tape to patch it.', 3.4);
+  }
+  function openHelp() {
+    if (helpOpen) return;
+    focusBeforeHelp = document.activeElement;
+    if (state === 'playing') pause();
+    helpOpen = true; $('helpScreen').hidden = false;
+    $('closeHelpButton').focus({ preventScroll: true }); clearInput();
+  }
+  function closeHelp() {
+    helpOpen = false; $('helpScreen').hidden = true;
+    if (state === 'paused') $('resumeButton').focus({ preventScroll: true });
+    else if (focusBeforeHelp && !focusBeforeHelp.disabled) focusBeforeHelp.focus({ preventScroll: true });
+    focusBeforeHelp = null;
+  }
+  function updateHUD() {
+    UI.distance.textContent = fmt(distance); UI.stars.textContent = fmt(stars);
+    [...UI.lives.children].forEach((el, i) => el.classList.toggle('lost', i >= lives));
+    UI.lives.setAttribute('aria-label', `${lives} of 3 hearts`);
+    UI.shield.hidden = shield <= 0 || state !== 'playing';
+    UI.shieldFill.style.transform = `scaleX(${clamp(shield / 7, 0, 1)})`;
+    const r = regionAt(distance);
+    UI.journeyName.textContent = palettes[r.index].name;
+    UI.journeyFill.style.transform = `scaleX(${clamp((distance - r.start) / (r.end - r.start), 0, 1)})`;
+    UI.journeyNext.textContent = `${fmt(Math.ceil(r.end - distance))} m to ${palettes[r.next].name}`;
+    const showWetness = state === 'playing' && (rainActive() || wetness > 0 || umbrella > 0);
+    UI.wetness.hidden = !showWetness;
+    UI.wetnessFill.style.transform = `scaleX(${wetness / 100})`;
+    UI.wetnessValue.textContent = `${Math.round(wetness)}%`;
+    UI.umbrellaNote.hidden = umbrella <= 0;
+    UI.wetness.classList.toggle('warning', wetness >= 62);
+    UI.wetness.classList.toggle('umbrella', umbrella > 0);
+    UI.wetness.setAttribute('aria-label', `Wetness ${Math.round(wetness)} percent${umbrella > 0 ? ', leaf umbrella active' : ''}`);
+    $('sceneName').textContent = `${palettes[r.index].name.toUpperCase()}${rainActive() ? ' - RAIN' : ''}`;
+  }
+
+  $('startButton').addEventListener('click', start);
+  $('againButton').addEventListener('click', start);
+  $('pauseButton').addEventListener('click', pause);
+  $('resumeButton').addEventListener('click', resume);
+  $('finishButton').addEventListener('click', finish);
+  $('homeButton').addEventListener('click', goHome);
+  $('brandLink').addEventListener('click', e => { e.preventDefault(); goHome(); });
+  $('soundButton').addEventListener('click', toggleSound);
+  $('volumeDownButton').addEventListener('click', () => changeVolume(-.1));
+  $('volumeUpButton').addEventListener('click', () => changeVolume(.1));
+  $('helpButton').addEventListener('click', openHelp);
+  $('closeHelpButton').addEventListener('click', closeHelp);
+  $('helpDoneButton').addEventListener('click', closeHelp);
+  $('runMode').addEventListener('click', () => selectMode('run'));
+  $('driftMode').addEventListener('click', () => selectMode('drift'));
+  $('captainName').addEventListener('change', updateBoatName);
+  $('captainName').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); start(); } });
+  document.querySelectorAll('.swatch').forEach(el => el.addEventListener('click', () => selectColor(Number(el.dataset.color))));
+  $('motionSetting').checked = profile.reducedMotion;
+  $('motionSetting').addEventListener('change', e => {
+    profile.reducedMotion = e.target.checked;
+    document.body.classList.toggle('reduce-motion', profile.reducedMotion); saveProfile();
+  });
+
+  const moveKeys = new Set(['arrowleft', 'arrowright', 'arrowup', 'arrowdown', 'w', 'a', 's', 'd']);
+  window.addEventListener('keydown', e => {
+    const k = e.key.toLowerCase();
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (k === 'tab') {
+      // Keep keyboard navigation in the active dialog, including nested help.
+      const layer = helpOpen ? $('helpScreen') : state === 'paused' ? $('pauseScreen') : state === 'ended' ? $('endScreen') : null;
+      if (layer) {
+        const controls = [...layer.querySelectorAll('button:not(:disabled),input:not(:disabled),a[href]')].filter(el => el.offsetParent !== null);
+        if (controls.length) {
+          const first = controls[0], last = controls[controls.length - 1];
+          if (e.shiftKey && (document.activeElement === first || !layer.contains(document.activeElement))) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && (document.activeElement === last || !layer.contains(document.activeElement))) { e.preventDefault(); first.focus(); }
+        }
+      }
+      return;
+    }
+    if (k === 'escape') { e.preventDefault(); if (!e.repeat) helpOpen ? closeHelp() : togglePause(); return; }
+    if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+    if (k === 'p') { e.preventDefault(); if (!e.repeat) togglePause(); return; }
+    if (k === 'm') { e.preventDefault(); if (!e.repeat) toggleSound(); return; }
+    if (helpOpen) return;
+    if (state === 'playing' && moveKeys.has(k)) { e.preventDefault(); keys.add(k); }
+    if ((k === 'enter' || k === ' ') && !e.repeat && (e.target === canvas || e.target === document.body)) {
+      e.preventDefault(); if (state === 'menu' || state === 'ended') start(); else if (state === 'paused') resume();
+    }
+  });
+  window.addEventListener('keyup', e => keys.delete(e.key.toLowerCase()));
+  window.addEventListener('blur', () => { clearInput(); if (state === 'playing') pause(); });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) { clearInput(); if (state === 'playing') pause(); } });
+
+  function pointerPosition(e) {
+    const r = canvas.getBoundingClientRect();
+    return { x: (e.clientX - r.left) * W / r.width, y: (e.clientY - r.top) * H / r.height };
+  }
+  canvas.addEventListener('pointerdown', e => {
+    if (state !== 'playing' || helpOpen || pointer || (e.pointerType === 'mouse' && e.button !== 0)) return;
+    e.preventDefault(); unlockAudio(); focusCanvas();
+    const p = pointerPosition(e), b = project(boat.q, boat.u);
+    pointer = { id: e.pointerId, x: p.x, y: p.y, startU: boat.u, startY: b.y, half: b.half, targetU: boat.u, targetQ: boat.q };
+    canvas.setPointerCapture(e.pointerId);
+  });
+  canvas.addEventListener('pointermove', e => {
+    if (!pointer || e.pointerId !== pointer.id || state !== 'playing') return;
+    const p = pointerPosition(e);
+    pointer.targetU = clamp(pointer.startU + (p.x - pointer.x) / pointer.half, -.86, .86);
+    pointer.targetQ = clamp(qFromY(pointer.startY + p.y - pointer.y), .63, .84);
+  });
+  const releasePointer = e => { if (pointer && pointer.id === e.pointerId) pointer = null; };
+  canvas.addEventListener('pointerup', releasePointer);
+  canvas.addEventListener('pointercancel', releasePointer);
+  canvas.addEventListener('lostpointercapture', releasePointer);
+  document.querySelectorAll('[data-steer]').forEach(el => {
+    el.addEventListener('pointerdown', e => {
+      if (state !== 'playing') return;
+      e.preventDefault(); touchDirections.set(e.pointerId, Number(el.dataset.steer));
+      el.setPointerCapture(e.pointerId); unlockAudio();
+    });
+    const release = e => touchDirections.delete(e.pointerId);
+    el.addEventListener('pointerup', release); el.addEventListener('pointercancel', release); el.addEventListener('lostpointercapture', release);
+  });
+
+  // Spawn rows leave a clear lane, and adjacent rows never force a full-width jump.
+  const lanes = [-.62, 0, .62];
+  function addObject(type, u, q = 0) {
+    const o = { type, u, q, variation: rand(.9, 1.08), phase: rand(0, TAU), angle: rand(-.16, .16), used: false };
+    objects.push(o); return o;
+  }
+  function spawnWave() {
+    waveCount++;
+    safeLane = clamp(safeLane + (Math.random() < .65 ? (Math.random() < .5 ? -1 : 1) : 0), 0, 2);
+    if (waveCount === 1) safeLane = 1;
+    if (rainActive()) addWetness(.55);
+    const u = lanes[safeLane];
+    for (let n = 0; n < 3; n++) addObject('star', u + Math.sin(waveCount + n * .5) * .025, -.055 * n);
+    if (mode === 'drift') return;
+    const blocked = [0, 1, 2].filter(i => i !== safeLane);
+    if (Math.random() > .5) blocked.reverse();
+    const count = distance > 280 && Math.random() < .50 ? 2 : 1;
+    for (let n = 0; n < count; n++) addObject(Math.random() < .65 ? 'rock' : 'log', lanes[blocked[n]], .025);
+  }
+  function burst(x, y, color, count = 14, force = 90) {
+    if (profile.reducedMotion) count = Math.min(count, 4);
+    for (let i = 0; i < count; i++) {
+      const a = rand(0, TAU), v = rand(30, force), life = rand(.4, .85);
+      particles.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 20, life, max: life, size: rand(2, 4), color });
+    }
+  }
+  function floatText(text, x, y, color = '#fff1bf') {
+    floatTexts.push({ text, x, y: y - 45 * unit, color, life: 1, max: 1 });
+  }
+  function collide(o, pos) {
+    o.used = true;
+    if (o.type === 'star') {
+      stars++; burst(pos.x, pos.y - 16 * pos.scale, '#ffdea0', 12, 100); sound('star');
+      if (stars % 3 === 0) floatText('+25', pos.x, pos.y);
+      return;
+    }
+    if (o.type === 'shield') {
+      shield = 7; burst(pos.x, pos.y, '#c8f4e0', 20, 130); sound('shield'); toast('Safe & sound for 7 seconds'); return;
+    }
+    if (o.type === 'heart') {
+      lives = Math.min(3, lives + 1); burst(pos.x, pos.y, '#f2beab', 14, 110); sound('heart'); toast('A little love. One heart restored.'); return;
+    }
+    if (o.type === 'leaf') {
+      umbrella = 15; addWetness(-8); burst(pos.x, pos.y, '#d4f2b6', 16, 105); sound('shield'); toast('Leaf umbrella! Rain protection, windier steering.'); return;
+    }
+    if (o.type === 'tape') {
+      const repaired = repairBurn(38);
+      addWetness(-4); burst(pos.x, pos.y, '#f6e7bc', 18, 115); sound('repair');
+      toast(repaired ? 'Tape patch! Burn marks repaired.' : 'Tape ready for the storm.'); return;
+    }
+    if (mode === 'drift' || boat.invulnerable > 0) return;
+    if (shield > 0) { if (rainActive()) addWetness(4); burst(pos.x, pos.y, '#d5f2d6', 14, 120); o.shattered = true; sound('click'); return; }
+    lives--; boat.invulnerable = 2; shake = profile.reducedMotion ? 0 : .32;
+    const b = project(boat.q, boat.u);
+    burst(b.x, b.y, '#eff8ea', 22, 160); sound('hit');
+    if (rainActive()) addWetness(9);
+    announce(`${lives} ${lives === 1 ? 'heart' : 'hearts'} remaining.`);
+    if (lives <= 0) finish();
+  }
+  function step(dt) {
+    menuBlend = lerp(menuBlend, state === 'menu' ? 1 : 0, profile.reducedMotion ? 1 : smooth(3.7, dt));
+    if (state === 'menu' && !helpOpen) {
+      if (!profile.reducedMotion) { clock += dt; travel += dt * .021; }
+      return;
+    }
+    if (state !== 'playing' || helpOpen) return;
+    clock += dt; runTime += dt;
+    const wetRatio = wetness / 100;
+    const speed = (mode === 'drift' ? .09 : .112 + Math.min(distance / 19000, .06)) * (1 - wetRatio * .08);
+    travel += speed * dt; distance += speed * 155 * dt;
+    boat.invulnerable = Math.max(0, boat.invulnerable - dt);
+    shield = Math.max(0, shield - dt); umbrella = Math.max(0, umbrella - dt); shake = Math.max(0, shake - dt); lightningFlash = Math.max(0, lightningFlash - dt);
+    const raining = rainActive();
+    if (raining && !rainAnnounced) { rainAnnounced = true; toast('Level 4 rain begins. Watch the wetness meter!', 3.6); }
+    if (raining) {
+      addWetness(dt * (umbrella > 0 ? .35 : 2.25 + wetRatio * .75));
+      if (umbrella > 0) addWetness(-dt * .65);
+      thunderTimer -= dt;
+      if (thunderTimer <= 0) { thunderStrike(); thunderTimer = rand(14, 22) * (profile.reducedMotion ? 1.35 : 1); }
+    } else if (wetness > 0) addWetness(-dt * .25);
+    if (!raining) thunderTimer = Math.min(thunderTimer, 12);
+    if (state !== 'playing') return;
+    let ax = Number(keys.has('arrowright') || keys.has('d')) - Number(keys.has('arrowleft') || keys.has('a'));
+    let ay = Number(keys.has('arrowdown') || keys.has('s')) - Number(keys.has('arrowup') || keys.has('w'));
+    for (const direction of touchDirections.values()) ax += direction;
+    ax = clamp(ax, -1, 1);
+    const controlDrag = clamp(1 - wetRatio * .38 - (umbrella > 0 ? .08 : 0), .52, 1);
+    const umbrellaWind = umbrella > 0 && !profile.reducedMotion ? Math.sin(clock * 1.35) * .30 + Math.sin(clock * 2.2) * .12 : 0;
+    let targetVX = ax * 1.5 * controlDrag + umbrellaWind, targetVY = ay * .25 * (1 - wetRatio * .25);
+    if (pointer) {
+      targetVX = clamp((pointer.targetU - boat.u) * 11 * controlDrag + umbrellaWind, -2.2, 2.2);
+      targetVY = clamp((pointer.targetQ - boat.q) * 10 * (1 - wetRatio * .25), -.37, .37);
+    }
+    boat.vx = lerp(boat.vx, targetVX, smooth(12 - wetRatio * 4, dt)); boat.vy = lerp(boat.vy, targetVY, smooth(12 - wetRatio * 3, dt));
+    boat.u = clamp(boat.u + boat.vx * dt, -.86, .86); boat.q = clamp(boat.q + boat.vy * dt, .63, .84);
+    boat.tilt = lerp(boat.tilt, clamp(boat.vx * .095, -.19, .19), smooth(7, dt));
+
+    waveTimer -= dt;
+    if (waveTimer <= 0) { spawnWave(); waveTimer = mode === 'drift' ? 2.25 : Math.max(1.55, 2.2 - distance / 3000); }
+    pickupTimer -= dt;
+    if (pickupTimer <= 0 && mode === 'run') {
+      addObject(lives < 3 && Math.random() < .5 ? 'heart' : 'shield', lanes[safeLane], -.22);
+      pickupTimer = rand(11, 16);
+    }
+    leafTimer -= dt;
+    if (raining && leafTimer <= 0) {
+      const lane = Math.random() < .65 ? safeLane : clamp(safeLane + (Math.random() < .5 ? -1 : 1), 0, 2);
+      addObject('leaf', lanes[lane], -.18); leafTimer = rand(10, 15);
+    } else if (!raining) leafTimer = Math.min(leafTimer, 8);
+    tapeTimer -= dt;
+    if (raining && burnDamage > 5 && tapeTimer <= 0 && mode === 'run') {
+      const lane = Math.random() < .7 ? safeLane : clamp(safeLane + (Math.random() < .5 ? -1 : 1), 0, 2);
+      addObject('tape', lanes[lane], -.20); tapeTimer = burnDamage > 35 ? rand(7, 11) : rand(12, 18);
+    } else if (!raining || burnDamage <= 0) tapeTimer = Math.min(tapeTimer, 10);
+    const b = project(boat.q, boat.u);
+    for (let i = objects.length - 1; i >= 0; i--) {
+      const o = objects[i]; o.q += speed * dt;
+      if (o.q > 1.18) { objects.splice(i, 1); continue; }
+      if (o.used || o.q < 0) continue;
+      const p = project(o.q, o.u), scale = p.scale * o.variation;
+      const obstacle = o.type === 'rock' || o.type === 'log';
+      const radiusX = (o.type === 'log' ? 47 : o.type === 'rock' ? 28 : o.type === 'leaf' || o.type === 'tape' ? 29 : 22) * scale + 31 * b.scale;
+      const radiusY = (obstacle ? 12 : 25) * scale + 14 * b.scale;
+      if (((p.x - b.x) / radiusX) ** 2 + ((p.y - b.y) / radiusY) ** 2 < 1) {
+        collide(o, p); if (state !== 'playing') break;
+      }
+    }
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i]; p.life -= dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 80 * dt;
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+    for (let i = floatTexts.length - 1; i >= 0; i--) {
+      const t = floatTexts[i]; t.life -= dt; t.y -= dt * 30;
+      if (t.life <= 0) floatTexts.splice(i, 1);
+    }
+    if (toastTimer > 0) { toastTimer -= dt; if (toastTimer <= 0) $('toast').hidden = true; }
+    const region = regionAt(distance);
+    if (region.key !== lastRegion) {
+      const rainJustStarted = region.key === 3 && rainAnnounced;
+      lastRegion = region.key;
+      if (!rainJustStarted) toast(`Welcome to ${palettes[region.index].name}`, 3.7);
+      sound('landmark');
+    }
+    $('playHint').hidden = runTime > 5 || state !== 'playing';
+    hudTimer -= dt;
+    if (hudTimer <= 0) { updateHUD(); hudTimer = .06; }
+  }
+
+  // ---- All illustration is vector-drawn at the screen's native pixel density. ----
+  function poly(points, fill, stroke, width = 1) {
+    ctx.beginPath(); ctx.moveTo(points[0], points[1]);
+    for (let i = 2; i < points.length; i += 2) ctx.lineTo(points[i], points[i + 1]);
+    ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = width; ctx.stroke(); }
+  }
+  function ellipse(x, y, rx, ry, color, rotation = 0) {
+    ctx.beginPath(); ctx.ellipse(x, y, Math.max(.01, rx), Math.max(.01, ry), rotation, 0, TAU);
+    ctx.fillStyle = color; ctx.fill();
+  }
+  function line(points, color, width = 1) {
+    ctx.beginPath(); ctx.moveTo(points[0], points[1]);
+    for (let i = 2; i < points.length; i += 2) ctx.lineTo(points[i], points[i + 1]);
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+  }
+  function roundRect(x, y, w, h, r, fill) {
+    ctx.beginPath(); ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r); ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+  }
+  function ring(x, y, rx, ry, color, width = 1.5, a = 0, b = TAU) {
+    ctx.beginPath(); ctx.ellipse(x, y, Math.max(.01, rx), Math.max(.01, ry), 0, a, b); ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+  }
+  function starShape(x, y, radius, fill, stroke = null) {
+    const points = [];
+    for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, r = radius * (i % 2 ? .47 : 1); points.push(x + Math.cos(a) * r, y + Math.sin(a) * r); }
+    poly(points, fill, stroke, 1.1);
+  }
+  const ripples = Array.from({ length: 110 }, (_, i) => ({ q: seeded(i + 12) * 1.16, u: seeded(i + 124) * 1.88 - .94, w: 7 + seeded(i + 445) * 23, phase: seeded(i + 778) * TAU }));
+  const shoreSeeds = Array.from({ length: 54 }, (_, i) => ({ q: seeded(i + 900) * 1.14, sign: i % 2 ? -1 : 1, offset: 24 + seeded(i + 400) * 130, kind: i % 7 < 3 ? 'tree' : i % 7 < 5 ? 'flower' : 'grass', seed: i + 34 }));
+  const cloudSeeds = Array.from({ length: 8 }, (_, i) => ({ x: seeded(i + 66), y: .055 + seeded(i + 77) * .16, s: .5 + seeded(i + 88) * .7 }));
+  const rainSeeds = Array.from({ length: 135 }, (_, i) => ({ x: seeded(i + 1600), y: seeded(i + 1700), s: .55 + seeded(i + 1800) * .85 }));
+  const texture = document.createElement('canvas'); texture.width = 160; texture.height = 160;
+  const tx = texture.getContext('2d');
+  for (let i = 0; i < 2200; i++) { tx.fillStyle = i % 2 ? 'rgba(30,60,44,.12)' : 'rgba(255,255,240,.22)'; tx.fillRect(seeded(i + 5) * 160, seeded(i + 18) * 160, .8, .8); }
+  const paperPattern = ctx.createPattern(texture, 'repeat');
+
+  function drawCloud(x, y, s) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    ellipse(0, 10, 66, 14, '#f6f7e8b0'); ellipse(-25, 0, 37, 20, '#f8faef'); ellipse(7, -13, 32, 28, '#f8faef'); ellipse(42, 3, 31, 18, '#f8faef');
+    ellipse(21, 18, 44, 5, '#d6e5dd70'); ctx.restore();
+  }
+  function drawRainOverlay() {
+    if (!rainActive() && wetness <= 0) return;
+    const intensity = clamp((distance - RAIN_START_DISTANCE + 240) / 720, .25, 1);
+    ctx.save();
+    ctx.globalAlpha = .17 + intensity * .27;
+    const rainWidth = portrait ? 1.3 : 1.6;
+    ctx.strokeStyle = '#dff6fa'; ctx.lineWidth = rainWidth;
+    for (const r of rainSeeds) {
+      const y = ((r.y * H + clock * (300 + r.s * 190)) % (H + 90)) - 70;
+      const x = ((r.x * W + Math.sin(clock * .8) * 24 + r.s * 70) % (W + 100)) - 50;
+      line([x, y, x + 12 * r.s, y + 36 * r.s], '#dff6fa', rainWidth * r.s);
+    }
+    if (wetness > 45) { ctx.globalAlpha = (wetness - 45) / 220; ctx.fillStyle = '#163f581f'; ctx.fillRect(0, 0, W, H); }
+    ctx.restore();
+  }
+  function drawThunderOverlay() {
+    if (lightningFlash <= 0) return;
+    const a = clamp(lightningFlash / .38, 0, 1);
+    ctx.save();
+    ctx.globalAlpha = a * .32; ctx.fillStyle = '#fff4c8'; ctx.fillRect(0, 0, W, H);
+    const startX = W * (.18 + seeded(Math.floor(distance) + 40) * .64), fork = profile.reducedMotion ? 0 : Math.sin(clock * 17) * 18;
+    ctx.globalAlpha = .55 + a * .42; ctx.strokeStyle = '#fff7bd'; ctx.lineWidth = portrait ? 3.2 : 4.5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(startX, 0); ctx.lineTo(startX - 24 + fork, H * .18); ctx.lineTo(startX + 18 - fork * .5, H * .32); ctx.lineTo(startX - 12 + fork * .35, H * .48); ctx.stroke();
+    ctx.globalAlpha = .42 * a; ctx.strokeStyle = '#f6b868'; ctx.lineWidth = portrait ? 1.4 : 2;
+    ctx.beginPath(); ctx.moveTo(startX + 18, H * .20); ctx.lineTo(startX + 58, H * .29); ctx.lineTo(startX + 28, H * .39); ctx.stroke();
+    ctx.restore();
+  }
+  function drawBackground(pal) {
+    const sky = ctx.createLinearGradient(0, 0, 0, H * .51); sky.addColorStop(0, pal.sky); sky.addColorStop(1, pal.skyLow);
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, W, H);
+    const sunX = W * (portrait ? .80 : .82), sunY = H * .155, sunR = portrait ? 33 : 40;
+    ellipse(sunX, sunY, sunR * 1.45, sunR * 1.45, '#fff7d020'); ellipse(sunX, sunY, sunR * 1.18, sunR * 1.18, '#fff6ce2c'); ellipse(sunX, sunY, sunR, sunR, pal.sun);
+    if (regionAt(distance).index === 2) { ellipse(sunX + 13, sunY - 9, sunR * .9, sunR * .9, pal.sky); }
+    for (const c of cloudSeeds) {
+      const x = ((c.x * W + clock * (1 + c.s) * (profile.reducedMotion ? 0 : 1)) % (W + 240)) - 100;
+      drawCloud(x, c.y * H, c.s * (portrait ? .70 : 1));
+    }
+    // Layered paper hills, intentionally asymmetrical.
+    ctx.beginPath(); ctx.moveTo(0, H * .29);
+    ctx.bezierCurveTo(W * .13, H * .12, W * .22, H * .18, W * .39, H * .32);
+    ctx.bezierCurveTo(W * .55, H * .30, W * .65, H * .13, W * .8, H * .22);
+    ctx.bezierCurveTo(W * .94, H * .13, W, H * .24, W, H * .26); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fillStyle = pal.far; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(0, H * .31); ctx.bezierCurveTo(W * .11, H * .25, W * .25, H * .21, W * .46, H * .345);
+    ctx.bezierCurveTo(W * .61, H * .34, W * .79, H * .22, W, H * .27); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fillStyle = pal.hill; ctx.fill();
+    ctx.beginPath(); ctx.moveTo(0, H * .37); ctx.bezierCurveTo(W * .19, H * .29, W * .26, H * .30, W * .48, H * .36);
+    ctx.bezierCurveTo(W * .65, H * .31, W * .87, H * .29, W, H * .34); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fillStyle = pal.grass; ctx.fill();
+    // A few far-off treetops and the tiny keeper's cottage.
+    for (let i = 0; i < 17; i++) {
+      const x = i / 16 * W, y = H * (.305 + .012 * Math.sin(i * 3));
+      ellipse(x, y, 12 + seeded(i + 700) * 15, 19 + seeded(i + 670) * 15, i % 2 ? pal.hillDark : pal.hill);
+    }
+    drawCottage(W * .795, H * .307, portrait ? .36 : .55, pal);
+    // Birds disappear from the reduced-motion presentation.
+    if (!profile.reducedMotion) {
+      for (let i = 0; i < 3; i++) {
+        const x = W * .58 + i * 17 + Math.sin(clock * .12) * 22, y = H * .13 + i * 7;
+        ctx.beginPath(); ctx.moveTo(x - 4, y); ctx.quadraticCurveTo(x - 1, y - 3 - Math.sin(clock * 2 + i), x, y); ctx.quadraticCurveTo(x + 3, y - 3, x + 6, y - 1); ctx.strokeStyle = '#5b82767a'; ctx.lineWidth = 1.1; ctx.stroke();
+      }
+    }
+    const left = [], right = [];
+    for (let q = 0; q <= 1.205; q += .012) { const p = project(q); left.push([p.center - p.half, p.y]); right.push([p.center + p.half, p.y]); }
+    // Light cut-paper banks, with a darker layer beneath their edge.
+    for (const [points, sign] of [[left, -1], [right, 1]]) {
+      ctx.beginPath(); points.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+      for (let i = points.length - 1; i >= 0; i--) { const [x, y] = points[i]; ctx.lineTo(x + sign * (5 + i * .27), y); }
+      ctx.closePath(); ctx.fillStyle = pal.grassLight; ctx.fill();
+    }
+    ctx.beginPath(); left.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    for (let i = right.length - 1; i >= 0; i--) ctx.lineTo(right[i][0], right[i][1]); ctx.closePath();
+    const water = ctx.createLinearGradient(0, H * .30, 0, H); water.addColorStop(0, pal.water); water.addColorStop(1, pal.waterDeep);
+    ctx.fillStyle = water; ctx.fill();
+    ctx.save(); ctx.clip();
+    // Quiet reflections and long watercolor streaks.
+    for (let i = 0; i < 15; i++) {
+      const q = .14 + i * .059, p = project(q, .17 + Math.sin(i * 3) * .06);
+      ellipse(p.x, p.y, (12 + i * 2.6) * p.scale, 1.2 + i * .17, '#fcf5d020');
+    }
+    for (let i = 0; i < ripples.length; i++) {
+      const r = ripples[i], q = (r.q + travel * .8) % 1.18, p = project(q, r.u);
+      if (q < .06) continue;
+      const w = r.w * p.scale, y = p.y;
+      const shimmer = profile.reducedMotion ? 1 : .8 + Math.sin(clock * 1.5 + r.phase) * .2;
+      ctx.globalAlpha = shimmer;
+      if (i % 4 === 0) ellipse(p.x, y, w * 1.8, 2.2 * p.scale, '#e4f3d51c');
+      else {
+        ctx.beginPath(); ctx.moveTo(p.x - w, y); ctx.bezierCurveTo(p.x - w / 2, y + 2.5 * p.scale, p.x + w / 2, y + 2.5 * p.scale, p.x + w, y - 1 * p.scale);
+        ctx.strokeStyle = i % 3 ? '#edf8e659' : '#c7ece86b'; ctx.lineWidth = 1.3 * p.scale; ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1; ctx.restore();
+    // A thin pale shoreline keeps the water distinct from solid ground.
+    for (const points of [left, right]) {
+      ctx.beginPath(); points.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.strokeStyle = '#e9efd999'; ctx.lineWidth = portrait ? 3 : 4; ctx.stroke();
+    }
+    drawBridge(pal);
+  }
+  function drawCottage(x, y, s, pal) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    ellipse(0, 1, 45, 8, '#36564415'); poly([-27, 0, -27, -38, 0, -59, 28, -38, 28, 0], '#f2e6c8');
+    poly([-35, -36, -1, -65, 38, -36, 30, -31, 0, -53, -27, -30], '#c58e70');
+    poly([5, -64, 5, -79, 12, -79, 12, -57], '#a67f69'); roundRect(-8, -25, 13, 25, 6, '#7e9d8d');
+    roundRect(14, -31, 8, 10, 2, '#d1ba86'); line([18, -30, 18, -21], '#fff3d4', 1); ctx.restore();
+  }
+  function drawBridge(pal) {
+    const p = project(.205), x = p.center, y = p.y - 4, w = p.half * 1.17;
+    ctx.save(); ctx.translate(x, y); ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(-w, 8); ctx.quadraticCurveTo(0, -24, w, 8); ctx.strokeStyle = '#79927b'; ctx.lineWidth = 9; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-w, 3); ctx.quadraticCurveTo(0, -29, w, 3); ctx.strokeStyle = '#d5c7a0'; ctx.lineWidth = 6; ctx.stroke();
+    for (let i = 0; i <= 8; i++) { const xx = -w + (w * 2 * i / 8), yy = 3 - 16 * Math.sin(i / 8 * Math.PI); line([xx, yy - 4, xx, yy - 17], '#a4aa83', 2); }
+    ctx.beginPath(); ctx.moveTo(-w, -14); ctx.quadraticCurveTo(0, -46, w, -14); ctx.strokeStyle = '#b6b48e'; ctx.lineWidth = 3; ctx.stroke(); ctx.restore();
+  }
+  function canopy(x, y, rx, ry, fill, seed) {
+    ctx.beginPath();
+    for (let i = 0; i <= 20; i++) {
+      const a = i / 20 * TAU, r = 1 + .08 * Math.sin(i * 2.3 + seed);
+      const xx = x + Math.cos(a) * rx * r, yy = y + Math.sin(a) * ry * r;
+      if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+    }
+    ctx.closePath(); ctx.fillStyle = fill; ctx.fill();
+  }
+  function drawTree(x, y, s, seed, pal) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    ellipse(6, 4, 31, 7, '#315c4220');
+    poly([-5, 3, -4, -75, 4, -76, 5, 3], '#6e8060');
+    line([0, -33, -20, -60], '#6e8060', 4); line([1, -42, 23, -72], '#6e8060', 3);
+    canopy(-22, -68, 37, 33, pal.leafDark, seed);
+    canopy(21, -77, 36, 39, pal.leaf, seed + 5);
+    canopy(-9, -97, 40, 34, pal.leaf, seed + 8);
+    canopy(-17, -111, 28, 22, pal.leafLight, seed + 1);
+    ellipse(-27, -116, 12, 8, '#e3eac823', -.35);
+    for (let i = 0; i < 6; i++) { const a = seeded(seed * 7 + i) * TAU; ellipse(Math.cos(a) * 30 - 5, -90 + Math.sin(a) * 29, 3, 1.5, '#ecf1cb3b', a); }
+    ctx.restore();
+  }
+  function drawFlower(x, y, s, seed, pal) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    for (let i = 0; i < 3; i++) {
+      const xx = i * 11 - 10, yy = -11 - seeded(seed + i) * 19;
+      line([xx, 2, xx + 2, yy], '#74956b', 1.6); ellipse(xx - 3, yy * .42, 5, 2, '#7b9e6a', -.5);
+      for (let k = 0; k < 5; k++) { const a = k * TAU / 5; ellipse(xx + 2 + Math.cos(a) * 3.2, yy + Math.sin(a) * 3.2, 2.9, 2.2, i % 2 ? '#f5e8c5' : pal.flower, a); }
+      ellipse(xx + 2, yy, 1.6, 1.6, '#c6a75c');
+    }
+    ctx.restore();
+  }
+  function drawGrass(x, y, s, pal) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    for (let i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(i - 2, 1); ctx.quadraticCurveTo((i - 2) * 3, -9, (i - 2) * 6, -14 - (i % 3) * 5); ctx.strokeStyle = pal.leaf; ctx.lineWidth = 1.4; ctx.stroke(); }
+    ellipse(14, 4, 8, 2, '#e4ebbb60'); ctx.restore();
+  }
+  function drawLily(x, y, s, flower = false) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    ellipse(2, 4, 26, 6, '#235e692a');
+    ctx.beginPath(); ctx.ellipse(0, 0, 25, 10, -.08, .24, TAU - .13); ctx.lineTo(1, 0); ctx.closePath(); ctx.fillStyle = '#8fae76'; ctx.fill();
+    line([-18, -2, 1, 0, 15, -7], '#c4ce8e', 1); ellipse(-8, -3, 10, 2, '#b7c78b7a');
+    if (flower) { for (let i = 0; i < 5; i++) ellipse((i - 2) * 3, -5, 3.4, 9, i % 2 ? '#e8b8a2' : '#f3d7bc', (i - 2) * .4); ellipse(0, -5, 3, 3, '#f8e4ab'); }
+    ctx.restore();
+  }
+  function drawDuck(x, y, s) {
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s); if (!profile.reducedMotion) ctx.rotate(Math.sin(clock * 1.7) * .035);
+    ring(0, 4, 31, 7, '#eff6db70', 1.3); ellipse(2, -4, 23, 12, '#f2e9cf');
+    poly([-15, -4, -28, -16, -22, -1], '#e1d8be'); ellipse(-2, -6, 13, 7, '#b7ad8a', .15);
+    ellipse(18, -15, 8, 14, '#4a7c65'); ellipse(20, -23, 10, 9, '#477a63');
+    poly([27, -22, 38, -18, 27, -16], '#dbac58'); ellipse(23, -26, 1.5, 1.5, '#254746');
+    line([12, -14, 25, -12], '#f2eacf', 2); ctx.restore();
+  }
+  function drawRock(s = 1) {
+    ctx.save(); ctx.scale(s, s);
+    ellipse(1, 6, 39, 10, '#215d6d38'); ring(0, 8, 43, 9, '#d2ece06b', 1.7);
+    poly([-34, 2, -28, -21, -10, -40, 15, -41, 32, -19, 38, 4, 19, 12, -18, 11], '#839b97');
+    poly([-28, -21, -10, -40, -3, -11, -17, 9, -34, 2], '#9dafaa');
+    poly([-10, -40, 15, -41, 32, -19, -3, -11], '#c0c8b8');
+    poly([-3, -11, 32, -19, 38, 4, 19, 12, -17, 9], '#6e8988');
+    poly([-21, -26, -10, -40, -7, -23, -12, -28], '#d6d9c6');
+    ellipse(12, -30, 9, 3, '#9eae82', .15); ctx.restore();
+  }
+  function drawLog(s = 1, angle = -.05) {
+    ctx.save(); ctx.scale(s, s); ctx.rotate(angle);
+    ellipse(0, 8, 59, 10, '#215d6d38'); ring(0, 10, 64, 9, '#d6eee15e', 1.6);
+    roundRect(-49, -20, 104, 29, 9, '#947353'); roundRect(-46, -19, 99, 9, 4, '#be9b6b');
+    ellipse(-48, -5, 12, 15, '#d0b17d'); ring(-48, -5, 8, 11, '#967a55', 1.5); ring(-48, -5, 4, 6, '#ab8b5e', 1.3);
+    line([-27, -10, -10, -14, 7, -11, 27, -15, 43, -12], '#7e634d', 2);
+    line([-30, 0, -12, 2, 9, -2, 25, 1, 40, -3], '#735e49', 1.7);
+    poly([15, -17, 19, -32, 27, -33, 24, -13], '#9c7f5a'); ellipse(23, -32, 5, 2, '#d9ba85');
+    ellipse(32, -17, 11, 2.6, '#8c9a69'); ctx.restore();
+  }
+  function drawStar(s = 1, phase = 0) {
+    const bob = profile.reducedMotion ? 0 : Math.sin(clock * 3 + phase) * 3;
+    ctx.save(); ctx.scale(s, s); ellipse(0, 3, 17, 4, '#285c6b25');
+    ctx.translate(0, -19 + bob);
+    const glow = ctx.createRadialGradient(0, 0, 2, 0, 0, 33); glow.addColorStop(0, '#ffedb555'); glow.addColorStop(1, '#ffecad00'); ellipse(0, 0, 33, 33, glow);
+    starShape(1, 3, 20, '#bd944c'); starShape(0, 0, 20, '#f5cf78', '#ffebaf');
+    poly([0, -20, 0, 0, -11, 15, -10, 4, -19, -6, -7, -7], '#ffdf94');
+    line([-5, -7, 0, -17, 4, -8], '#fff0bb', 1.5);
+    if (!profile.reducedMotion) { const tw = .5 + .5 * Math.sin(clock * 4 + phase); ctx.globalAlpha = tw; line([23, -20, 23, -12], '#fff2c9', 1.3); line([19, -16, 27, -16], '#fff2c9', 1.3); ctx.globalAlpha = 1; }
+    ctx.restore();
+  }
+  function drawShield(s = 1) {
+    ctx.save(); ctx.scale(s, s); ellipse(0, 4, 19, 5, '#285c6b25');
+    const bob = profile.reducedMotion ? 0 : Math.sin(clock * 3) * 3;
+    ctx.translate(0, -23 + bob); ellipse(0, 0, 30, 30, '#def5de22');
+    poly([0, -24, 20, -16, 18, 4, 10, 17, 0, 23, -10, 17, -18, 4, -20, -16], '#6aa9a5', '#d8f3db', 2);
+    poly([0, -17, 13, -12, 12, 4, 0, 16], '#b0d7c5'); line([-8, -1, -2, 5, 9, -6], '#f1ffe5', 3); ctx.restore();
+  }
+  function drawHeart(s = 1) {
+    ctx.save(); ctx.scale(s, s); ellipse(0, 4, 18, 5, '#285c6b25');
+    ctx.translate(0, -20 + (profile.reducedMotion ? 0 : Math.sin(clock * 3) * 3));
+    ctx.beginPath(); ctx.moveTo(0, 17); ctx.bezierCurveTo(-35, -3, -17, -29, 0, -13); ctx.bezierCurveTo(17, -29, 35, -3, 0, 17); ctx.fillStyle = '#df987e'; ctx.fill(); ctx.strokeStyle = '#f6d4b7'; ctx.lineWidth = 2; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-13, -7); ctx.quadraticCurveTo(-13, -16, -5, -12); ctx.strokeStyle = '#ffe1c4'; ctx.lineWidth = 2.5; ctx.stroke(); ctx.restore();
+  }
+  function drawLeafPickup(s = 1, phase = 0) {
+    const bob = profile.reducedMotion ? 0 : Math.sin(clock * 2.7 + phase) * 3;
+    ctx.save(); ctx.scale(s, s); ellipse(0, 6, 27, 6, '#285c6b28'); ctx.translate(0, -17 + bob); ctx.rotate(Math.sin(clock * 1.9 + phase) * .1);
+    ctx.beginPath(); ctx.moveTo(-31, 3); ctx.bezierCurveTo(-17, -28, 19, -34, 33, -7); ctx.bezierCurveTo(14, 6, -10, 14, -31, 3); ctx.closePath(); ctx.fillStyle = '#83ad62'; ctx.fill(); ctx.strokeStyle = '#d6efac'; ctx.lineWidth = 2; ctx.stroke();
+    line([-24, 2, 23, -11], '#486f52', 2); line([-4, -3, -12, -18], '#b8d98a', 1.2); line([5, -5, 15, -22], '#b8d98a', 1.2);
+    ctx.restore();
+  }
+  function drawTapePickup(s = 1, phase = 0) {
+    const bob = profile.reducedMotion ? 0 : Math.sin(clock * 2.5 + phase) * 3;
+    ctx.save(); ctx.scale(s, s); ellipse(0, 6, 26, 6, '#285c6b28'); ctx.translate(0, -19 + bob); ctx.rotate(-.18 + Math.sin(clock * 1.7 + phase) * .08);
+    roundRect(-31, -10, 62, 20, 7, '#e5c980'); roundRect(-24, -7, 48, 14, 5, '#fff2c7');
+    ellipse(-28, 0, 10, 12, '#caa75b'); ellipse(-28, 0, 5, 7, '#fff7db');
+    line([-12, -7, -7, 7], '#d1b36f', 1.4); line([3, -7, 8, 7], '#d1b36f', 1.4); line([18, -7, 23, 7], '#d1b36f', 1.4);
+    ctx.globalAlpha = .55; ellipse(10, -10, 24, 4, '#fffdf3', -.12); ctx.globalAlpha = 1;
+    ctx.restore();
+  }
+  function drawAttachedLeafUmbrella(wind = 0) {
+    ctx.save(); ctx.rotate(wind * .35); line([0, -38, 0, -104], '#6f8267', 2.1);
+    ctx.translate(0, -111); ctx.rotate(-.12 + wind * .6);
+    ctx.beginPath(); ctx.moveTo(-51, 9); ctx.bezierCurveTo(-34, -34, 20, -45, 56, -11); ctx.bezierCurveTo(31, 12, -6, 22, -51, 9); ctx.closePath(); ctx.fillStyle = '#78a95e'; ctx.fill(); ctx.strokeStyle = '#d7edaa'; ctx.lineWidth = 2.5; ctx.stroke();
+    line([-40, 7, 43, -13], '#3f6f50', 2.2); line([-12, 0, -27, -22], '#bde09b', 1.4); line([6, -5, 23, -31], '#bde09b', 1.4);
+    ellipse(-21, -6, 13, 4, '#ecffd438', -.35); ctx.restore();
+  }
+  function drawBoat(x, y, s, hero = false) {
+    const col = accents[profile.color];
+    const bob = profile.reducedMotion ? 0 : Math.sin(clock * 2.8) * 1.8;
+    const wet = hero ? 0 : wetness / 100, burn = hero ? 0 : burnDamage / 100, sag = wet * 8, sink = Math.pow(wet, 1.18) * 28;
+    const peak = blendHex('#f8f4df', '#aebbb7', wet * .85), peakShade = blendHex('#dfdfce', '#8fa5a5', wet * .9), peakLight = blendHex('#fff9e7', '#c5d0c3', wet * .75);
+    const hull = blendHex('#fffbee', '#bccac1', wet * .82), hullMid = blendHex('#f9f6e5', '#aebfb9', wet * .88), hullShade = blendHex('#e3e6d7', '#839a9c', wet * .92), hullLight = blendHex('#fffced', '#c8d1c5', wet * .72), crease = blendHex('#eef2e2', '#779299', wet * .95);
+    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+    // The wake stays in the water as the paper gently leans above it.
+    ellipse(0, 17, 55, 10, '#245c6b2c');
+    ring(0, 18, 69, 12, '#dcf1e36b', 1.6); ring(0, 23, 83, 15, '#e0f5e12a', 1.3, .2, Math.PI - .2);
+    if (!profile.reducedMotion) {
+      for (let i = 0; i < 3; i++) {
+        const t = (clock * .7 + i / 3) % 1; ctx.globalAlpha = (1 - t) * .35;
+        ring(0, 23 + t * 28, 40 + t * 50, 7 + t * 10, '#f1f6d7', 1.3, .05, Math.PI - .05);
+      }
+      ctx.globalAlpha = 1;
+    }
+    ctx.translate(0, bob + sink); ctx.rotate(hero ? Math.sin(clock * .8) * .025 : boat.tilt);
+    if (!hero && umbrella > 0) drawAttachedLeafUmbrella(profile.reducedMotion ? 0 : Math.sin(clock * 1.5) * .28);
+    if (!hero && shield > 0) {
+      const g = ctx.createRadialGradient(-16, -30, 8, 0, -20, 88); g.addColorStop(0, '#d5fce31a'); g.addColorStop(.85, '#d6fee72b'); g.addColorStop(1, '#c6f6e060');
+      ellipse(0, -22, 84, 91, g); ring(0, -22, 84, 91, '#d9fce8a8', 1.8);
+      ring(0, -22, 77, 84, '#f1ffe75c', 2, 3.5, 4.2);
+    }
+    const flash = !hero && boat.invulnerable > 0 && Math.floor(clock * 10) % 2 === 0;
+    if (flash) ctx.globalAlpha = .55;
+    // Folded origami, not a sailboat: the triangular center is part of the paper.
+    poly([-38, -29, 0, -88 + sag * .45, 38, -29, 0, -10 + sag * .2], peak);
+    poly([-38, -29, 0, -88 + sag * .45, 0, -10 + sag * .2], peakShade);
+    poly([0, -88 + sag * .45, 10, -40, 38, -29, 0, -10 + sag * .2], peakLight);
+    line([0, -86 + sag * .45, 0, -10 + sag * .2], '#9fb5af', 1.4);
+    poly([-67, -34, -36, -26, 0, -15, 37, -26, 67, -34, 0, sag * .25], hull);
+    poly([-67, -34, 0, sag * .25, 67, -34, 43, 17 + sag, 0, 28 + sag, -43, 17 + sag], hullMid);
+    poly([-67, -34, 0, sag * .25, 0, 28 + sag, -43, 17 + sag], hullShade);
+    poly([0, sag * .25, 67, -34, 43, 17 + sag, 0, 28 + sag], hullLight);
+    poly([-67, -34, -24, -15, 0, sag * .25, -38, -16], blendHex('#f1f2e2', '#9fb4b0', wet * .8));
+    line([-54, -14, 0, 12, 54, -14], col.stripe, 2.8); line([0, 0, 0, 27], '#bacfc6', 1.2);
+    line([-42, 16 + sag * .5, 0, 26 + sag, 42, 16 + sag * .5], crease, 1);
+    if (profile.captainName) {
+      ctx.save(); ctx.rotate(.08); ctx.globalAlpha = flash ? .45 : .72;
+      ctx.font = "900 9px 'Trebuchet MS', Arial, sans-serif"; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 2.2; ctx.strokeStyle = '#fff9ed99'; ctx.fillStyle = blendHex('#244b48', '#5f7473', wet * .7);
+      ctx.strokeText(profile.captainName, 0, 5 + sag * .35, 70); ctx.fillText(profile.captainName, 0, 5 + sag * .35, 70);
+      ctx.restore(); ctx.globalAlpha = flash ? .55 : 1;
+    }
+    if (wet > .05) {
+      ctx.globalAlpha = Math.min(.55, .14 + wet * .45);
+      ellipse(-24, -8, 18 + wet * 9, 5 + wet * 4, '#567b836b', -.25); ellipse(20, 5 + sag * .55, 21 + wet * 7, 5 + wet * 3, '#446a7468', .15);
+      line([-47, 4 + sag * .45, -25, 12 + sag, -3, 16 + sag, 26, 12 + sag], '#315f6a6e', 1.4 + wet);
+      ctx.globalAlpha = flash ? .55 : 1;
+    }
+    if (burn > .02) {
+      ctx.globalAlpha = Math.min(.70, .15 + burn * .68);
+      ellipse(25, -48 + sag * .25, 9 + burn * 18, 5 + burn * 10, '#51362c', -.36); ellipse(38, -18 + sag * .35, 8 + burn * 15, 4 + burn * 8, '#3b2a25', .14);
+      line([15, -50 + sag * .2, 31, -43 + sag * .2, 45, -50 + sag * .15], '#211817', 1.1 + burn * 2);
+      line([23, -10 + sag * .45, 37, -5 + sag * .6, 48, -9 + sag * .5], '#211817', 1 + burn * 1.5);
+      ctx.globalAlpha = Math.min(.35, burn * .55); ellipse(30, -53 + sag * .25, 21 + burn * 13, 9 + burn * 5, '#f07b3b', -.35);
+      ctx.globalAlpha = flash ? .55 : 1;
+    }
+    // A tiny pennant, attached to the center fold.
+    line([1, -87, 1, -112], '#839b8d', 1.7);
+    const flutter = profile.reducedMotion ? 0 : Math.sin(clock * 4.2) * 1.5;
+    poly([2, -111, 29, -102 + flutter, 2, -93], col.flag); poly([2, -111, 16, -106, 2, -102], col.light);
+    ctx.globalAlpha = 1; ctx.restore();
+  }
+  function drawObject(o) {
+    if (o.q < 0 || o.shattered || (o.used && o.type !== 'rock' && o.type !== 'log')) return;
+    const p = project(o.q, o.u), scale = p.scale * o.variation;
+    ctx.save(); ctx.translate(p.x, p.y); ctx.globalAlpha = o.used ? .48 : 1;
+    if (o.type === 'rock') drawRock(scale);
+    else if (o.type === 'log') drawLog(scale, o.angle);
+    else if (o.type === 'star') drawStar(scale, o.phase);
+    else if (o.type === 'shield') drawShield(scale);
+    else if (o.type === 'heart') drawHeart(scale);
+    else if (o.type === 'leaf') drawLeafPickup(scale, o.phase);
+    else if (o.type === 'tape') drawTapePickup(scale, o.phase);
+    ctx.restore();
+  }
+  function render() {
+    ctx.setTransform(canvas.width / W, 0, 0, canvas.height / H, 0, 0);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    const pal = paletteAt(state === 'menu' ? 0 : distance);
+    ctx.save();
+    if (shake > 0 && !profile.reducedMotion) ctx.translate(Math.sin(clock * 81) * shake * 10, Math.cos(clock * 67) * shake * 6);
+    drawBackground(pal);
+    const scenery = [];
+    for (const seed of shoreSeeds) {
+      const q = (seed.q + travel * .25) % 1.18;
+      if (q < .045) continue;
+      const p = project(q), s = p.scale;
+      const x = p.center + seed.sign * (p.half + seed.offset * s + (seed.kind === 'tree' ? 21 * s : 0));
+      if (x < -150 || x > W + 150) continue;
+      scenery.push({ y: p.y, paint: () => {
+        if (seed.kind === 'tree') drawTree(x, p.y, s * (seed.seed % 3 === 0 ? 1.15 : .82), seed.seed, pal);
+        else if (seed.kind === 'flower') drawFlower(x, p.y, s, seed.seed, pal);
+        else drawGrass(x, p.y, s, pal);
+      } });
+    }
+    // Lilies and ducks hug the shore; they are never collision objects.
+    for (let i = 0; i < 9; i++) {
+      const q = (.12 + i * .109 + travel * .33) % 1.14, p = project(q, i % 2 ? -.94 : .94);
+      scenery.push({ y: p.y, paint: () => drawLily(p.x, p.y, p.scale, i % 3 === 0) });
+    }
+    const duck = project(.47 + Math.sin(clock * .14) * .012, .88);
+    scenery.push({ y: duck.y, paint: () => drawDuck(duck.x, duck.y, duck.scale * .9) });
+    if (state === 'menu') {
+      const hero = project(portrait ? .80 : .79, .01);
+      scenery.push({ y: hero.y, paint: () => drawBoat(hero.x, hero.y, hero.scale * (portrait ? 1.35 : 1.28), true) });
+      for (const [type, u, q] of [['star', -.04, .56], ['star', -.07, .44], ['star', .06, .34], ['rock', -.58, .65], ['log', .60, .38]]) {
+        const o = { type, u, q, variation: 1, angle: -.08, phase: q, used: false };
+        scenery.push({ y: project(q).y, paint: () => drawObject(o) });
+      }
+    } else {
+      for (const o of objects) if (o.q >= 0) scenery.push({ y: project(o.q).y, paint: () => drawObject(o) });
+      const b = project(boat.q, boat.u);
+      scenery.push({ y: b.y, paint: () => drawBoat(b.x, b.y, b.scale) });
+    }
+    scenery.sort((a, b) => a.y - b.y); scenery.forEach(item => item.paint());
+    drawRainOverlay();
+    drawThunderOverlay();
+    for (const p of particles) { ctx.globalAlpha = Math.max(0, p.life / p.max); ellipse(p.x, p.y, p.size, p.size, p.color); }
+    ctx.globalAlpha = 1;
+    for (const t of floatTexts) { ctx.globalAlpha = Math.max(0, t.life / t.max); ctx.fillStyle = t.color; ctx.font = `bold ${portrait ? 19 : 17}px Trebuchet MS, sans-serif`; ctx.textAlign = 'center'; ctx.fillText(t.text, t.x, t.y); }
+    ctx.globalAlpha = 1;
+    if (paperPattern) { ctx.globalAlpha = .38; ctx.fillStyle = paperPattern; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1; }
+    ctx.restore();
+  }
+  function frame(now) {
+    const elapsed = lastFrame ? Math.min((now - lastFrame) / 1000, .05) : 0;
+    lastFrame = now;
+    if (!manualFrames) {
+      // Short substeps keep collisions reliable during low-frame-rate moments.
+      let remaining = elapsed;
+      while (remaining > 0) { const dt = Math.min(remaining, 1 / 90); step(dt); remaining -= dt; }
+      render();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // Deliberate, query-gated test harness. It is inactive during normal play.
+  // Open ?test=1 to run deterministic integration checks from a browser console.
+  if (new URLSearchParams(location.search).get('test') === '1') {
+    window.__paperBoatTest = Object.freeze({
+      snapshot: () => ({ state, mode, distance, stars, lives, shield, wetness, umbrella, burnDamage, lightningFlash, raining: rainActive(), rainStartsAt: RAIN_START_DISTANCE, runTime, helpOpen, boat: { ...boat }, region: regionAt(distance), objects: objects.map(o => ({ ...o })), profile: { ...profile }, W, H, storageAvailable }),
+      manual: value => { manualFrames = Boolean(value); },
+      advance: seconds => { let n = clamp(seconds, 0, 180); while (n > 0) { const dt = Math.min(n, 1 / 90); step(dt); n -= dt; } updateHUD(); render(); },
+      place: (type, u = boat.u, q = boat.q) => { if (['star', 'rock', 'log', 'shield', 'heart', 'leaf', 'tape'].includes(type)) addObject(type, u, q); },
+      clear: () => { objects.length = 0; waveTimer = 20; leafTimer = 20; },
+      move: (u, q = boat.q) => { boat.u = clamp(u, -.86, .86); boat.q = clamp(q, .63, .84); },
+      setDistance: value => { distance = Math.max(0, Number(value) || 0); updateHUD(); render(); },
+      setWetness: value => { wetness = clamp(Number(value) || 0, 0, 100); updateHUD(); render(); },
+      setBurn: value => { burnDamage = clamp(Number(value) || 0, 0, 85); render(); },
+      thunder: thunderStrike,
+      render, finish, project: (q, u) => project(q, u)
+    });
+  }
+  $('storageNote').hidden = storageAvailable;
+  $('captainName').value = profile.captainName;
+  document.body.classList.toggle('reduce-motion', profile.reducedMotion);
+  updateSoundButton(); refreshHeader(); selectColor(profile.color); selectMode('run'); updateHUD(); resize(); render();
+  requestAnimationFrame(frame);
+})();
+
+</script>
+</body>
+</html>
